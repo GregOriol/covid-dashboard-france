@@ -6,7 +6,7 @@
 
 	<title>Covid Dashboard France</title>
 
-	<link href="vendor/normalize.css/normalize.min.css" rel="stylesheet">
+	<link href="node_modules/normalize.css/normalize.css" rel="stylesheet">
 	<link href="node_modules/c3/c3.min.css" rel="stylesheet">
 
 	<link href="index.css" rel="stylesheet">
