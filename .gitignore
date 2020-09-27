@@ -1,0 +1,5 @@
+# System, IDE, ...
+.DS_Store
+.idea
+.vagrant
+.bundle
