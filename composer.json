@@ -1,0 +1,15 @@
+{
+    "name": "gregoriol/covid-dashboard-france",
+    "description": "Displays public data related to covid in France",
+    "license": "BSD-2-Clause",
+    "require": {
+        "php": "^7.1",
+        "ext-zip": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CovidDashboardFrance\\": "src/CovidDashboardFrance/"
+        }
+    }
+}
