@@ -13,12 +13,15 @@
 
 	<script src="node_modules/d3/dist/d3.min.js" charset="utf-8"></script>
 	<script src="node_modules/c3/c3.min.js"></script>
+	<script src="node_modules/tinycolor2/dist/tinycolor-min.js"></script>
 
 	<script src="index.js"></script>
 </head>
 <body>
 	<div id="options">
-		Dataset: <select id="dataset" name="dataset"></select>
+		Dataset 1: <select id="dataset1" name="dataset1" class="dataset"></select><br>
+		Dataset 2: <select id="dataset2" name="dataset2" class="dataset"></select><br>
+		Dataset 3: <select id="dataset3" name="dataset3" class="dataset"></select>
 	</div>
 	<div id="charts" class="clearfix">
 		<div class="chart" id="chart-total-hosp"></div>

@@ -8,36 +8,58 @@ function domReady(fn) {
 }
 function addEventHandler(elem, eventType, handler) {
 	if (elem.addEventListener)
-		elem.addEventListener (eventType, handler, false);
+		elem.addEventListener(eventType, handler, false);
 	else if (elem.attachEvent)
-		elem.attachEvent ('on' + eventType, handler);
+		elem.attachEvent('on' + eventType, handler);
 }
 
 domReady(() => {
 	// console.log(data);
 
-	const datasetElem = document.getElementById('dataset');
+	const datasetElem1 = document.getElementById('dataset1');
+	const datasetElem2 = document.getElementById('dataset2');
+	const datasetElem3 = document.getElementById('dataset3');
 
-	makeDatasets(datasetElem);
+	makeDatasets(datasetElem1);
+	makeDatasets(datasetElem2, true);
+	makeDatasets(datasetElem3, true);
 
-	addEventHandler(datasetElem, 'change', function() {
-		const dataset = datasetElem.value;
+	const getSelectedDatasets = function(name, dataCat, dataType, color) {
+		const selectedData = [];
 
-		bindChart('total-hosp', 'hosp', data[dataset].total.hosp, '#8393A7');
-		bindChart('total-rea', 'rea', data[dataset].total.rea, '#03539d');
-		bindChart('total-rad', 'rad', data[dataset].total.rad, '#03BD5B');
-		bindChart('total-dc', 'dc', data[dataset].total.dc, '#D1335B');
+		color = tinycolor(color);
 
-		bindChart('incidence-hosp', 'incidence hosp', data[dataset].incidence.hosp, '#8393A7');
-		bindChart('incidence-rea', 'incidence rea', data[dataset].incidence.rea, '#03539d');
-		bindChart('incidence-rad', 'incidence rad', data[dataset].incidence.rad, '#03BD5B');
-		bindChart('incidence-dc', 'incidence dc', data[dataset].incidence.dc, '#D1335B');
-	});
+		for (const [_, datasetElem] of Object.entries([datasetElem1, datasetElem2, datasetElem3])) {
+			if (datasetElem.value === 'none') { continue; }
 
-	datasetElem.dispatchEvent(new Event('change'));
+			selectedData.push({name: name + ' ' + datasetElem.options[datasetElem.selectedIndex].text, data: data[datasetElem.value][dataCat][dataType], color: color.toString()});
+
+			color.spin(36);
+		}
+
+		return selectedData;
+	}
+
+	const changeFunction = function() {
+		bindChart('total-hosp', getSelectedDatasets('Hosp', 'total', 'hosp', '#8393A7'));
+		bindChart('total-rea', getSelectedDatasets('Réa', 'total', 'rea', '#03539d'));
+		bindChart('total-rad', getSelectedDatasets('Rad', 'total', 'rad', '#03BD5B'));
+		bindChart('total-dc', getSelectedDatasets('Dc', 'total', 'dc', '#D1335B'));
+
+		bindChart('incidence-hosp', getSelectedDatasets('Incidence hosp', 'incidence', 'hosp', '#8393A7'));
+		bindChart('incidence-rea', getSelectedDatasets('Incidence rea', 'incidence', 'rea', '#03539d'));
+		bindChart('incidence-rad', getSelectedDatasets('Incidence rad', 'incidence', 'rad', '#03BD5B'));
+		bindChart('incidence-dc', getSelectedDatasets('Incidence dc', 'incidence', 'dc', '#D1335B'));
+	};
+
+	addEventHandler(datasetElem1, 'change', changeFunction);
+	addEventHandler(datasetElem2, 'change', changeFunction);
+	addEventHandler(datasetElem3, 'change', changeFunction);
+
+	datasetElem1.dispatchEvent(new Event('change'));
 });
 
-function makeDatasets(datasetElem) {
+function makeDatasets(datasetElem, none = false) {
 	const datasets = {
 		'country': [],
 		'region': [],
@@ -48,6 +70,11 @@ function makeDatasets(datasetElem) {
 	}
 
 	let options = '';
+
+	if (none) {
+		options += '<option value="none">----</option>';
+	}
+
 	for (const [group, values] of Object.entries(datasets)) {
 		if (values.length === 0) { continue; }
 
@@ -66,28 +93,27 @@ function makeDatasets(datasetElem) {
 	datasetElem.innerHTML = options;
 }
 
-function bindChart(id, name, data, color) {
+function bindChart(id, datasets) {
 	// cleaning previous chart
 	document.getElementById('chart-'+id+'').innerHTML = '<div class="chart-container"></div><div class="chart-info"></div>';
 
 	// preparing data
-	const xs = [...data.x];
+	const xs = [...datasets[0].data.x];
 	xs.unshift('x');
-	const values = [...data.values];
-	values.unshift(name);
 
-	const chart = c3.generate({
+	const options = {
 		bindto: '#chart-'+id+' .chart-container',
 		data: {
 			x: 'x',
 			columns: [
 				xs,
-				values,
+				// values,
+				// values2,
 			],
 			type: 'bar',
-			// color: function (color_, d) { console.log(color_, d); return color; }
 			colors: {
-				[name]: color,
+				// [dataset.name]: dataset.color,
+				// [dataset.name+'2']: '#ff0000',
 			}
 		},
 		axis: {
@@ -118,7 +144,17 @@ function bindChart(id, name, data, color) {
 		// legend: {
 		// 	show: false
 		// },
-	});
+	};
 
-	document.querySelector('#chart-'+id+' .chart-info').innerHTML = 'Update: '+data.x[data.x.length - 1];
+	for (const [_, dataset] of Object.entries(datasets)) {
+		const values = [...dataset.data.values];
+		values.unshift(dataset.name);
+		options.data.columns.push(values);
+
+		options.data.colors[dataset.name] = dataset.color;
+	}
+
+	const chart = c3.generate(options);
+
+	document.querySelector('#chart-'+id+' .chart-info').innerHTML = 'Données : '+datasets[0].data.x[0]+' - '+datasets[0].data.x[datasets[0].data.x.length - 1];
 }
