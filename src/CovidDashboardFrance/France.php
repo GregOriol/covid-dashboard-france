@@ -13,14 +13,14 @@ class France
     /**
      * France constructor.
      *
-     * @param $depatmentsDataUrl
+     * @param $departmentsDataUrl
      * @param $regionsDataUrl
      *
      * @throws \Exception
      */
-    public function __construct($depatmentsDataUrl, $regionsDataUrl)
+    public function __construct($departmentsDataUrl, $regionsDataUrl)
     {
-        $this->populateDepartments($depatmentsDataUrl);
+        $this->populateDepartments($departmentsDataUrl);
         $this->populateRegions($regionsDataUrl);
     }
 
@@ -80,12 +80,30 @@ class France
     public function getRegionForDepartment(Department $department): ?Region
     {
         foreach ($this->regions as $region) {
-            if ($region->number == $department->number) {
+            if ($region->number == $department->region) {
                 return $region;
             }
         }
 
         return null;
+    }
+
+    /**
+     * @param Region $region
+     *
+     * @return Department|null
+     */
+    public function getDepartmentsForRegion(Region $region): ?array
+    {
+        $departments = array();
+
+        foreach ($this->departments as $department) {
+            if ($department->region == $region->number) {
+                $departments[] = $department;
+            }
+        }
+
+        return !empty($departments) ? $departments : null;
     }
 
     /**

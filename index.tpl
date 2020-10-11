@@ -24,10 +24,10 @@
 		Dataset 3: <select id="dataset3" name="dataset3" class="dataset"></select>
 	</div>
 	<div id="charts" class="clearfix">
-		<div class="chart" id="chart-total-hosp"></div>
-		<div class="chart" id="chart-total-rea"></div>
-		<div class="chart" id="chart-total-rad"></div>
-		<div class="chart" id="chart-total-dc"></div>
+		<div class="chart" id="chart-hosp"></div>
+		<div class="chart" id="chart-rea"></div>
+		<div class="chart" id="chart-rad"></div>
+		<div class="chart" id="chart-dc"></div>
 	</div>
 
 	<div id="charts" class="clearfix">
@@ -35,6 +35,13 @@
 		<div class="chart" id="chart-incidence-rea"></div>
 		<div class="chart" id="chart-incidence-rad"></div>
 		<div class="chart" id="chart-incidence-dc"></div>
+	</div>
+
+	<div id="charts" class="clearfix">
+		<div class="chart" id="chart-pop"></div>
+		<div class="chart" id="chart-p"></div>
+		<div class="chart" id="chart-tx"></div>
+		<div class="chart" id="chart-tx7"></div>
 	</div>
 
 	<script type="text/javascript">

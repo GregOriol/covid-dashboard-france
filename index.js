@@ -24,7 +24,7 @@ domReady(() => {
 	makeDatasets(datasetElem2, true);
 	makeDatasets(datasetElem3, true);
 
-	const getSelectedDatasets = function(name, dataCat, dataType, color) {
+	const getSelectedDatasets = function(name, dataType, color) {
 		const selectedData = [];
 
 		color = tinycolor(color);
@@ -32,7 +32,7 @@ domReady(() => {
 		for (const [_, datasetElem] of Object.entries([datasetElem1, datasetElem2, datasetElem3])) {
 			if (datasetElem.value === 'none') { continue; }
 
-			selectedData.push({name: name + ' ' + datasetElem.options[datasetElem.selectedIndex].text, data: data[datasetElem.value][dataCat][dataType], color: color.toString()});
+			selectedData.push({name: name + ' ' + datasetElem.options[datasetElem.selectedIndex].text, data: data[datasetElem.value][dataType], color: color.toString()});
 
 			color.spin(36);
 		}
@@ -41,15 +41,20 @@ domReady(() => {
 	}
 
 	const changeFunction = function() {
-		bindChart('total-hosp', getSelectedDatasets('Hosp', 'total', 'hosp', '#8393A7'));
-		bindChart('total-rea', getSelectedDatasets('Réa', 'total', 'rea', '#03539d'));
-		bindChart('total-rad', getSelectedDatasets('Rad', 'total', 'rad', '#03BD5B'));
-		bindChart('total-dc', getSelectedDatasets('Dc', 'total', 'dc', '#D1335B'));
+		bindChart('hosp', getSelectedDatasets('Hosp', 'hosp', '#8393A7'));
+		bindChart('rea', getSelectedDatasets('Réa', 'rea', '#03539d'));
+		bindChart('rad', getSelectedDatasets('Rad', 'rad', '#03BD5B'));
+		bindChart('dc', getSelectedDatasets('Dc', 'dc', '#D1335B'));
 
-		bindChart('incidence-hosp', getSelectedDatasets('Incidence hosp', 'incidence', 'hosp', '#8393A7'));
-		bindChart('incidence-rea', getSelectedDatasets('Incidence rea', 'incidence', 'rea', '#03539d'));
-		bindChart('incidence-rad', getSelectedDatasets('Incidence rad', 'incidence', 'rad', '#03BD5B'));
-		bindChart('incidence-dc', getSelectedDatasets('Incidence dc', 'incidence', 'dc', '#D1335B'));
+		bindChart('incidence-hosp', getSelectedDatasets('Incidence hosp', 'incidenceHosp', '#8393A7'));
+		bindChart('incidence-rea', getSelectedDatasets('Incidence rea', 'incidenceRea', '#03539d'));
+		bindChart('incidence-rad', getSelectedDatasets('Incidence rad', 'incidenceRad', '#03BD5B'));
+		bindChart('incidence-dc', getSelectedDatasets('Incidence dc', 'incidenceDc', '#D1335B'));
+
+		bindChart('pop', getSelectedDatasets('Population', 'pop', '#3368d1'));
+		bindChart('p', getSelectedDatasets('Tests positifs', 'p', '#D1335B'));
+		bindChart('tx', getSelectedDatasets('Taux incidence quotidien', 'tx', '#ba8c11'));
+		bindChart('tx7', getSelectedDatasets('Taux incidence semaine', 'tx7', '#ba8c11'));
 	};
 
 	addEventHandler(datasetElem1, 'change', changeFunction);
@@ -66,6 +71,8 @@ function makeDatasets(datasetElem, none = false) {
 		'department': [],
 	};
 	for (const [datasetId, datasetValues] of Object.entries(data)) {
+		if (datasetId === 'x') { continue; }
+
 		datasets[datasetValues.type].push({id: datasetId, name: datasetValues.name});
 	}
 
@@ -98,8 +105,13 @@ function bindChart(id, datasets) {
 	document.getElementById('chart-'+id+'').innerHTML = '<div class="chart-container"></div><div class="chart-info"></div>';
 
 	// preparing data
-	const xs = [...datasets[0].data.x];
+	const xs = [...data['x']];
 	xs.unshift('x');
+
+	let type = 'bar';
+	if (id === 'pop') {
+		type = 'line';
+	}
 
 	const options = {
 		bindto: '#chart-'+id+' .chart-container',
@@ -110,7 +122,7 @@ function bindChart(id, datasets) {
 				// values,
 				// values2,
 			],
-			type: 'bar',
+			type: type,
 			colors: {
 				// [dataset.name]: dataset.color,
 				// [dataset.name+'2']: '#ff0000',
@@ -146,8 +158,22 @@ function bindChart(id, datasets) {
 		// },
 	};
 
+	let start = null;
+	let end = null;
 	for (const [_, dataset] of Object.entries(datasets)) {
-		const values = [...dataset.data.values];
+		const values = [...dataset.data];
+
+		let foundStart = false;
+		for (let i = 0; i < values.length; i++) {
+			if (values[i] !== null) {
+				if (!foundStart) {
+					start = i;
+					foundStart = true;
+				}
+				end = i;
+			}
+		}
+
 		values.unshift(dataset.name);
 		options.data.columns.push(values);
 
@@ -156,5 +182,5 @@ function bindChart(id, datasets) {
 
 	const chart = c3.generate(options);
 
-	document.querySelector('#chart-'+id+' .chart-info').innerHTML = 'Données : '+datasets[0].data.x[0]+' - '+datasets[0].data.x[datasets[0].data.x.length - 1];
+	document.querySelector('#chart-'+id+' .chart-info').innerHTML = 'Données : '+xs[start+1]+' - '+xs[end+1];
 }

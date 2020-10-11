@@ -1,12 +1,23 @@
 <?php
 
+use CovidDashboardFrance\Helpers;
+
+require_once 'src/CovidDashboardFrance/Helpers.php';
+
 require_once 'src/CovidDashboardFrance/Department.php';
 require_once 'src/CovidDashboardFrance/Region.php';
 require_once 'src/CovidDashboardFrance/France.php';
 
 require_once 'src/CovidDashboardFrance/Covid.php';
-require_once 'src/CovidDashboardFrance/Total.php';
-require_once 'src/CovidDashboardFrance/Incidence.php';
+require_once 'src/CovidDashboardFrance/Data.php';
+
+require_once 'src/CovidDashboardFrance/Populators/Total.php';
+require_once 'src/CovidDashboardFrance/Populators/Incidence.php';
+require_once 'src/CovidDashboardFrance/Populators/Taux.php';
+
+//
+// Preparing data about France
+//
 
 // Source: https://www.insee.fr/fr/information/3363419#titre-bloc-23
 // https://www.insee.fr/fr/statistiques/fichier/3363419/depts2018-txt.zip
@@ -16,14 +27,14 @@ $depatmentsDataUrl = 'https://www.insee.fr/fr/statistiques/fichier/3363419/depts
 $regionsDataUrl = 'https://www.insee.fr/fr/statistiques/fichier/3363419/reg2018-txt.zip';
 
 // Use the following lines (or any better implementation) to cache the json data instead of downloading it each time
-$cachedDepatmentsDataUrl = 'depts.zip';
-if (!file_exists($cachedDepatmentsDataUrl)) {
+$cachedDepatmentsDataPath = './cache/depts.zip';
+if (!file_exists($cachedDepatmentsDataPath)) {
    $depatmentsContents = file_get_contents($depatmentsDataUrl);
-   file_put_contents($cachedDepatmentsDataUrl, $depatmentsContents);
+   file_put_contents($cachedDepatmentsDataPath, $depatmentsContents);
 }
-$depatmentsDataUrl = $cachedDepatmentsDataUrl;
+$depatmentsDataUrl = $cachedDepatmentsDataPath;
 
-$cachedRegionsDataPath = 'regs.zip';
+$cachedRegionsDataPath = './cache/regs.zip';
 if (!file_exists($cachedRegionsDataPath)) {
    $regionsContents = file_get_contents($regionsDataUrl);
    file_put_contents($cachedRegionsDataPath, $regionsContents);
@@ -32,131 +43,175 @@ $regionsDataUrl = $cachedRegionsDataPath;
 
 $france = new \CovidDashboardFrance\France($depatmentsDataUrl, $regionsDataUrl);
 
-// Source: https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/#resource-6fadff46-9efd-4c53-942a-54aca783c30c
-// https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7
-// https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c
+//
+// Preparing data about Covid
+//
+
+// Sources:
+// - https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19
+// https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7 donnees-hospitalieres-covid19-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c donnees-hospitalieres-nouveaux-covid19-*.csv
+//
+// - https://www.data.gouv.fr/fr/datasets/taux-dincidence-de-lepidemie-de-covid-19
+// https://www.data.gouv.fr/fr/datasets/r/4180a181-a648-402b-92e4-f7574647afa6 sp-pe-std-quot-dep-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/23066f40-ddd2-40c9-931c-4257f36ad778 sp-pe-std-quot-reg-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/59ad717b-b64e-4779-85f6-cd1b25b24703 sp-pe-std-quot-fra-*.csv
+//
+// - https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19
+// https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e
+//
+// - https://www.data.gouv.fr/fr/datasets/capacite-analytique-de-tests-virologiques-dans-le-cadre-de-lepidemie-covid-19
+// https://www.data.gouv.fr/fr/datasets/r/f02b627a-9f9c-45f9-810d-af49ef98a0b1
 
 $totalDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7';
 $incidenceDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c';
+$tauxDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4180a181-a648-402b-92e4-f7574647afa6';
+$tauxRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/23066f40-ddd2-40c9-931c-4257f36ad778';
+$tauxFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/59ad717b-b64e-4779-85f6-cd1b25b24703';
+$indicateursDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e';
+$analytiqueDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/f02b627a-9f9c-45f9-810d-af49ef98a0b1';
 
-$cachedTotalDataPath = 'total.csv';
+$cachedTotalDataPath = './cache/total.csv';
 if (!file_exists($cachedTotalDataPath)) {
     $totalContents = file_get_contents($totalDataUrl);
     file_put_contents($cachedTotalDataPath, $totalContents);
 }
 $totalDataUrl = $cachedTotalDataPath;
 
-$cachedIncidenceDataPath = 'incidence.csv';
+$cachedIncidenceDataPath = './cache/incidence.csv';
 if (!file_exists($cachedIncidenceDataPath)) {
     $incidenceContents = file_get_contents($incidenceDataUrl);
     file_put_contents($cachedIncidenceDataPath, $incidenceContents);
 }
 $incidenceDataUrl = $cachedIncidenceDataPath;
 
-$covid = new \CovidDashboardFrance\Covid($totalDataUrl, $incidenceDataUrl);
+$cachedTauxDepDataPath = './cache/taux-dep.csv';
+if (!file_exists($cachedTauxDepDataPath)) {
+    $tauxContents = file_get_contents($tauxDepDataUrl);
+    file_put_contents($cachedTauxDepDataPath, $tauxContents);
+}
+$tauxDepDataUrl = $cachedTauxDepDataPath;
 
-//var_dump($covid->getTotal());
-//var_dump($covid->getTotalConsolidated());
+$cachedTauxRegDataPath = './cache/taux-reg.csv';
+if (!file_exists($cachedTauxRegDataPath)) {
+    $tauxContents = file_get_contents($tauxRegDataUrl);
+    file_put_contents($cachedTauxRegDataPath, $tauxContents);
+}
+$tauxRegDataUrl = $cachedTauxRegDataPath;
 
-$data = array(
-    'france' => [
-        'type' => 'country',
-        'id' => 'france',
-        'name' => 'France',
-        'total' => [
-            'hosp' => [],
-            'rea' => [],
-            'rad' => [],
-            'dc' => [],
-        ],
-        'incidence' => [
-            'hosp' => [],
-            'rea' => [],
-            'rad' => [],
-            'dc' => [],
-        ]
-    ]
+$cachedTauxFraDataPath = './cache/taux-fra.csv';
+if (!file_exists($cachedTauxFraDataPath)) {
+    $tauxContents = file_get_contents($tauxFraDataUrl);
+    file_put_contents($cachedTauxFraDataPath, $tauxContents);
+}
+$tauxFraDataUrl = $cachedTauxFraDataPath;
+
+//$cachedIndicateursDataPath = './cache/indicateurs.csv';
+//if (!file_exists($cachedIndicateursDataPath)) {
+//    $indicateursContents = file_get_contents($indicateursDataUrl);
+//    file_put_contents($cachedIndicateursDataPath, $indicateursContents);
+//}
+//$indicateursDataUrl = $cachedIndicateursDataPath;
+//
+//$cachedAnalytiqueDataPath = './cache/analytique.csv';
+//if (!file_exists($cachedAnalytiqueDataPath)) {
+//    $analytiqueContents = file_get_contents($analytiqueDataUrl);
+//    file_put_contents($cachedAnalytiqueDataPath, $analytiqueContents);
+//}
+//$analytiqueDataUrl = $cachedAnalytiqueDataPath;
+
+$covid = new \CovidDashboardFrance\Covid();
+
+$populator = new \CovidDashboardFrance\Populators\Total($france, $covid);
+$populator->populateData($totalDataUrl);
+$populator->generateConsolidations();
+
+$populator = new \CovidDashboardFrance\Populators\Incidence($france, $covid);
+$populator->populateData($incidenceDataUrl);
+$populator->generateConsolidations();
+
+$populator = new \CovidDashboardFrance\Populators\Taux($france, $covid);
+$populator->populateData($tauxDepDataUrl, $tauxRegDataUrl, $tauxFraDataUrl);
+$populator->generateConsolidations();
+
+//var_dump($covid->data);
+//var_dump($covid->refs);
+
+$indicators = array('hosp', 'rea', 'rad', 'dc', 'incidenceHosp', 'incidenceRea', 'incidenceRad', 'incidenceDc', 'pop', 'p', 'tx', 'tx7');
+
+$output = array(
+    'x' => [],
 );
 
+Helpers::dateIterator(function ($date) use (&$output) {
+    $output['x'][] = $date->format('Y-m-d');
+});
+
+$dataStruct = array(
+    'type' => null,
+    'id' => null,
+    'name' => null,
+);
+foreach ($indicators as $indicator) {
+    $dataStruct[$indicator] = [];
+}
+
+$output['fra'] = $dataStruct;
+$output['fra']['type'] = 'country';
+$output['fra']['id']   = 'fra';
+$output['fra']['name'] = 'France';
+
 foreach ($france->getRegions() as $region) {
-    $data['reg'.$region->number] = [
-        'type' => 'region',
-        'id' => $region->number,
-        'name' => $region->name,
-        'total' => [
-            'hosp' => [],
-            'rea' => [],
-            'rad' => [],
-            'dc' => [],
-        ],
-        'incidence' => [
-            'hosp' => [],
-            'rea' => [],
-            'rad' => [],
-            'dc' => [],
-        ]
-    ];
+    $key = 'reg'.$region->number;
+    $output[$key] = $dataStruct;
+    $output[$key]['type'] = 'region';
+    $output[$key]['id']   = $region->number;
+    $output[$key]['name'] = $region->name;
+}
+foreach ($france->getDepartments() as $department) {
+    $key = 'dep'.$department->number;
+    $output[$key] = $dataStruct;
+    $output[$key]['type'] = 'department';
+    $output[$key]['id']   = $department->number;
+    $output[$key]['name'] = str_pad($department->number, 2, '0', STR_PAD_LEFT).' '.$department->name;
 }
 
-foreach ($data as $datasetKey => $datasetValues) {
-    foreach ($covid->getTotalConsolidated() as $c) {
-        $k = $c->date->format('Y-m-d');
+foreach ($output as $datasetKey => $dataset) {
+    if ($datasetKey === 'x') {
+        continue;
+    }
 
-        foreach ($data[$datasetKey]['total'] as $indicator => $v) {
-            if (!array_key_exists($k, $data[$datasetKey]['total'][$indicator])) {
-                $data[$datasetKey]['total'][$indicator][$k] = 0;
-            }
-
-            if ($datasetValues['type'] == 'region') {
-                if ($france->getDepartment($c->department) === null) {
-                    var_dump($c);
-                }
-                if ($france->getDepartment($c->department)->region != $datasetValues['id']) {
-                    continue;
-                }
-            }
-
-            $data[$datasetKey]['total'][$indicator][$k] += $c->$indicator;
+    Helpers::dateIterator(function ($date) use (&$indicators, &$output, &$covid, &$france, &$datasetKey, &$dataset) {
+        $country = 'FRA';
+        $region = null;
+        $department = null;
+        if ($dataset['type'] === 'region') {
+            $region = $dataset['id'];
         }
-    }
-
-    foreach ($data[$datasetKey]['total'] as $k => $v) {
-        $data[$datasetKey]['total'][$k] = [
-            'x'      => array_keys($v),
-            'values' => array_values($v),
-        ];
-    }
-
-    foreach ($covid->getIncidence() as $c) {
-        $k = $c->date->format('Y-m-d');
-
-        foreach ($data[$datasetKey]['incidence'] as $indicator => $v) {
-            if (!array_key_exists($k, $data[$datasetKey]['incidence'][$indicator])) {
-                $data[$datasetKey]['incidence'][$indicator][$k] = 0;
-            }
-
-            if ($datasetValues['type'] == 'region') {
-                if ($france->getDepartment($c->department)->region != $datasetValues['id']) {
-                    continue;
-                }
-            }
-
-            $data[$datasetKey]['incidence'][$indicator][$k] += $c->$indicator;
+        if ($dataset['type'] === 'department') {
+            $region = $france->getDepartment($dataset['id'])->region;
+            $department = $dataset['id'];
         }
-    }
+        $data = $covid->getDataForDate($date, $country, $region, $department);
+        //var_dump($data);
 
-    foreach ($data[$datasetKey]['incidence'] as $k => $v) {
-        $data[$datasetKey]['incidence'][$k] = [
-            'x'      => array_keys($v),
-            'values' => array_values($v),
-        ];
-    }
+        foreach ($indicators as $indicator) {
+            //var_dump($datasetKey); var_dump($indicator); var_dump($data->$indicator);
+            if (in_array($indicator, ['tx', 'tx7'])) {
+                $output[$datasetKey][$indicator][] = round($data->$indicator, 2);
+            } else {
+                $output[$datasetKey][$indicator][] = $data->$indicator;
+            }
+        }
+    });
 }
+
+//var_dump($output);
 
 //var_dump(json_encode($data));
 //var_dump(json_last_error_msg());
 
 $tpl = file_get_contents('index.tpl');
-$tpl = str_replace('[DATA]', json_encode($data), $tpl);
+$tpl = str_replace('[DATA]', json_encode($output), $tpl);
 
 file_put_contents('index.html', $tpl);
