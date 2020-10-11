@@ -23,6 +23,8 @@
 		Dataset 2: <select id="dataset2" name="dataset2" class="dataset"></select><br>
 		Dataset 3: <select id="dataset3" name="dataset3" class="dataset"></select>
 	</div>
+
+	<h2>Données hospitalières</h2>
 	<div id="charts" class="clearfix">
 		<div class="chart" id="chart-hosp"></div>
 		<div class="chart" id="chart-rea"></div>
@@ -37,11 +39,27 @@
 		<div class="chart" id="chart-incidence-dc"></div>
 	</div>
 
+	<h2>Tests et incidence</h2>
 	<div id="charts" class="clearfix">
-		<div class="chart" id="chart-pop"></div>
+		<div class="chart" id="chart-t"></div>
 		<div class="chart" id="chart-p"></div>
+		<div class="chart" id="chart-txPos"></div>
+		<div class="chart" id="chart-txPos7"></div>
 		<div class="chart" id="chart-tx"></div>
 		<div class="chart" id="chart-tx7"></div>
+	</div>
+
+	<h2>Indicateurs de suivi de l’épidémie</h2>
+	<div id="charts" class="clearfix">
+		<div class="chart" id="chart-consolTx"></div>
+		<div class="chart" id="chart-consolTxPos"></div>
+		<div class="chart" id="chart-r"></div>
+		<div class="chart" id="chart-occup"></div>
+	</div>
+
+	<h2>Divers</h2>
+	<div id="charts" class="clearfix">
+		<div class="chart" id="chart-pop"></div>
 	</div>
 
 	<script type="text/javascript">

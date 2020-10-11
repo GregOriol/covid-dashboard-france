@@ -13,7 +13,9 @@ require_once 'src/CovidDashboardFrance/Data.php';
 
 require_once 'src/CovidDashboardFrance/Populators/Total.php';
 require_once 'src/CovidDashboardFrance/Populators/Incidence.php';
-require_once 'src/CovidDashboardFrance/Populators/Taux.php';
+require_once 'src/CovidDashboardFrance/Populators/Tests.php';
+require_once 'src/CovidDashboardFrance/Populators/Capa.php';
+require_once 'src/CovidDashboardFrance/Populators/Indicateurs.php';
 
 //
 // Preparing data about France
@@ -57,19 +59,26 @@ $france = new \CovidDashboardFrance\France($depatmentsDataUrl, $regionsDataUrl);
 // https://www.data.gouv.fr/fr/datasets/r/23066f40-ddd2-40c9-931c-4257f36ad778 sp-pe-std-quot-reg-*.csv
 // https://www.data.gouv.fr/fr/datasets/r/59ad717b-b64e-4779-85f6-cd1b25b24703 sp-pe-std-quot-fra-*.csv
 //
-// - https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19
-// https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e
-//
 // - https://www.data.gouv.fr/fr/datasets/capacite-analytique-de-tests-virologiques-dans-le-cadre-de-lepidemie-covid-19
-// https://www.data.gouv.fr/fr/datasets/r/f02b627a-9f9c-45f9-810d-af49ef98a0b1
+// https://www.data.gouv.fr/fr/datasets/r/0c230dc3-2d51-4f17-be97-aa9938564b39 sp-capa-quot-dep-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/21ff3134-c37c-41ef-bb3d-fbea5f6d4a28 sp-capa-quot-reg-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/44b46964-8583-4f18-b93f-80fefcbf3b74 sp-capa-quot-fra-*.csv
+//
+// - https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19
+// https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e indicateurs-covid19-dep.csv
+// https://www.data.gouv.fr/fr/datasets/r/381a9472-ce83-407d-9a64-1b8c23af83df indicateurs-covid19-fra.csv
+//
 
 $totalDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7';
 $incidenceDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c';
-$tauxDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4180a181-a648-402b-92e4-f7574647afa6';
-$tauxRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/23066f40-ddd2-40c9-931c-4257f36ad778';
-$tauxFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/59ad717b-b64e-4779-85f6-cd1b25b24703';
-$indicateursDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e';
-$analytiqueDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/f02b627a-9f9c-45f9-810d-af49ef98a0b1';
+$testsDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4180a181-a648-402b-92e4-f7574647afa6';
+$testsRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/23066f40-ddd2-40c9-931c-4257f36ad778';
+$testsFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/59ad717b-b64e-4779-85f6-cd1b25b24703';
+$capaDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/0c230dc3-2d51-4f17-be97-aa9938564b39';
+$capaRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/21ff3134-c37c-41ef-bb3d-fbea5f6d4a28';
+$capaFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/44b46964-8583-4f18-b93f-80fefcbf3b74';
+$indicateursDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e';
+$indicateursFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/381a9472-ce83-407d-9a64-1b8c23af83df';
 
 $cachedTotalDataPath = './cache/total.csv';
 if (!file_exists($cachedTotalDataPath)) {
@@ -85,40 +94,61 @@ if (!file_exists($cachedIncidenceDataPath)) {
 }
 $incidenceDataUrl = $cachedIncidenceDataPath;
 
-$cachedTauxDepDataPath = './cache/taux-dep.csv';
-if (!file_exists($cachedTauxDepDataPath)) {
-    $tauxContents = file_get_contents($tauxDepDataUrl);
-    file_put_contents($cachedTauxDepDataPath, $tauxContents);
+$cachedTestsDepDataPath = './cache/tests-dep.csv';
+if (!file_exists($cachedTestsDepDataPath)) {
+    $testsContents = file_get_contents($testsDepDataUrl);
+    file_put_contents($cachedTestsDepDataPath, $testsContents);
 }
-$tauxDepDataUrl = $cachedTauxDepDataPath;
+$testsDepDataUrl = $cachedTestsDepDataPath;
 
-$cachedTauxRegDataPath = './cache/taux-reg.csv';
-if (!file_exists($cachedTauxRegDataPath)) {
-    $tauxContents = file_get_contents($tauxRegDataUrl);
-    file_put_contents($cachedTauxRegDataPath, $tauxContents);
+$cachedTestsRegDataPath = './cache/tests-reg.csv';
+if (!file_exists($cachedTestsRegDataPath)) {
+    $testsContents = file_get_contents($testsRegDataUrl);
+    file_put_contents($cachedTestsRegDataPath, $testsContents);
 }
-$tauxRegDataUrl = $cachedTauxRegDataPath;
+$testsRegDataUrl = $cachedTestsRegDataPath;
 
-$cachedTauxFraDataPath = './cache/taux-fra.csv';
-if (!file_exists($cachedTauxFraDataPath)) {
-    $tauxContents = file_get_contents($tauxFraDataUrl);
-    file_put_contents($cachedTauxFraDataPath, $tauxContents);
+$cachedTestsFraDataPath = './cache/tests-fra.csv';
+if (!file_exists($cachedTestsFraDataPath)) {
+    $testsContents = file_get_contents($testsFraDataUrl);
+    file_put_contents($cachedTestsFraDataPath, $testsContents);
 }
-$tauxFraDataUrl = $cachedTauxFraDataPath;
+$testsFraDataUrl = $cachedTestsFraDataPath;
 
-//$cachedIndicateursDataPath = './cache/indicateurs.csv';
-//if (!file_exists($cachedIndicateursDataPath)) {
-//    $indicateursContents = file_get_contents($indicateursDataUrl);
-//    file_put_contents($cachedIndicateursDataPath, $indicateursContents);
-//}
-//$indicateursDataUrl = $cachedIndicateursDataPath;
-//
-//$cachedAnalytiqueDataPath = './cache/analytique.csv';
-//if (!file_exists($cachedAnalytiqueDataPath)) {
-//    $analytiqueContents = file_get_contents($analytiqueDataUrl);
-//    file_put_contents($cachedAnalytiqueDataPath, $analytiqueContents);
-//}
-//$analytiqueDataUrl = $cachedAnalytiqueDataPath;
+$cachedCapaDepDataPath = './cache/capa-dep.csv';
+if (!file_exists($cachedCapaDepDataPath)) {
+    $capaContents = file_get_contents($capaDepDataUrl);
+    file_put_contents($cachedCapaDepDataPath, $capaContents);
+}
+$capaDepDataUrl = $cachedCapaDepDataPath;
+
+$cachedCapaRegDataPath = './cache/capa-reg.csv';
+if (!file_exists($cachedCapaRegDataPath)) {
+    $capaContents = file_get_contents($capaRegDataUrl);
+    file_put_contents($cachedCapaRegDataPath, $capaContents);
+}
+$capaRegDataUrl = $cachedCapaRegDataPath;
+
+$cachedCapaFraDataPath = './cache/capa-fra.csv';
+if (!file_exists($cachedCapaFraDataPath)) {
+    $capaContents = file_get_contents($capaFraDataUrl);
+    file_put_contents($cachedCapaFraDataPath, $capaContents);
+}
+$capaFraDataUrl = $cachedCapaFraDataPath;
+
+$cachedIndicateursDepDataPath = './cache/indicateurs-dep.csv';
+if (!file_exists($cachedIndicateursDepDataPath)) {
+    $indicateursContents = file_get_contents($indicateursDepDataUrl);
+    file_put_contents($cachedIndicateursDepDataPath, $indicateursContents);
+}
+$indicateursDepDataUrl = $cachedIndicateursDepDataPath;
+
+$cachedIndicateursFraDataPath = './cache/indicateurs-fra.csv';
+if (!file_exists($cachedIndicateursFraDataPath)) {
+    $indicateursContents = file_get_contents($indicateursFraDataUrl);
+    file_put_contents($cachedIndicateursFraDataPath, $indicateursContents);
+}
+$indicateursFraDataUrl = $cachedIndicateursFraDataPath;
 
 $covid = new \CovidDashboardFrance\Covid();
 
@@ -130,14 +160,22 @@ $populator = new \CovidDashboardFrance\Populators\Incidence($france, $covid);
 $populator->populateData($incidenceDataUrl);
 $populator->generateConsolidations();
 
-$populator = new \CovidDashboardFrance\Populators\Taux($france, $covid);
-$populator->populateData($tauxDepDataUrl, $tauxRegDataUrl, $tauxFraDataUrl);
+$populator = new \CovidDashboardFrance\Populators\Tests($france, $covid);
+$populator->populateData($testsDepDataUrl, $testsRegDataUrl, $testsFraDataUrl);
 $populator->generateConsolidations();
+
+$populator = new \CovidDashboardFrance\Populators\Capa($france, $covid);
+$populator->populateData($capaDepDataUrl, $capaRegDataUrl, $capaFraDataUrl);
+$populator->generateConsolidations();
+
+$populator = new \CovidDashboardFrance\Populators\Indicateurs($france, $covid);
+$populator->populateData($indicateursDepDataUrl, $indicateursFraDataUrl);
+//$populator->generateConsolidations();
 
 //var_dump($covid->data);
 //var_dump($covid->refs);
 
-$indicators = array('hosp', 'rea', 'rad', 'dc', 'incidenceHosp', 'incidenceRea', 'incidenceRad', 'incidenceDc', 'pop', 'p', 'tx', 'tx7');
+$indicators = array('hosp', 'rea', 'rad', 'dc', 'incidenceHosp', 'incidenceRea', 'incidenceRad', 'incidenceDc', 'pop', 't', 'p', 'tx', 'tx7', 'txPos', 'txPos7', 'consolTx', 'consolTxPos', 'r', 'occup');
 
 $output = array(
     'x' => [],
@@ -197,8 +235,8 @@ foreach ($output as $datasetKey => $dataset) {
 
         foreach ($indicators as $indicator) {
             //var_dump($datasetKey); var_dump($indicator); var_dump($data->$indicator);
-            if (in_array($indicator, ['tx', 'tx7'])) {
-                $output[$datasetKey][$indicator][] = round($data->$indicator, 2);
+            if (in_array($indicator, ['tx', 'tx7', 'txPos', 'txPos7', 'consolTx', 'consolTxPos', 'r', 'occup'])) {
+                $output[$datasetKey][$indicator][] = ($data->$indicator !== null) ? round($data->$indicator, 2) : null;
             } else {
                 $output[$datasetKey][$indicator][] = $data->$indicator;
             }

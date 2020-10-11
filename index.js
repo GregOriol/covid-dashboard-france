@@ -51,10 +51,19 @@ domReady(() => {
 		bindChart('incidence-rad', getSelectedDatasets('Incidence rad', 'incidenceRad', '#03BD5B'));
 		bindChart('incidence-dc', getSelectedDatasets('Incidence dc', 'incidenceDc', '#D1335B'));
 
-		bindChart('pop', getSelectedDatasets('Population', 'pop', '#3368d1'));
+		bindChart('t', getSelectedDatasets('Tests réalisés', 't', '#4864cd'));
 		bindChart('p', getSelectedDatasets('Tests positifs', 'p', '#D1335B'));
-		bindChart('tx', getSelectedDatasets('Taux incidence quotidien', 'tx', '#ba8c11'));
-		bindChart('tx7', getSelectedDatasets('Taux incidence semaine', 'tx7', '#ba8c11'));
+		bindChart('tx', getSelectedDatasets('Tests incidence quotidien', 'tx', '#ba8c11'), 'Taux de tests positifs pour 100\'000 personnes');
+		bindChart('tx7', getSelectedDatasets('Tests incidence semaine', 'tx7', '#ba8c11'), 'Taux de tests positifs pour 100\'000 personnes sur une semaine');
+		bindChart('txPos', getSelectedDatasets('Tests positivité quotidien', 'txPos', '#7f11ba'), '% de tests positifs');
+		bindChart('txPos7', getSelectedDatasets('Tests positivité semaine', 'txPos7', '#7f11ba'), '% de tests positifs sur une semaine');
+
+		bindChart('consolTx', getSelectedDatasets('Taux incidence', 'consolTx', '#004192'), 'Taux en %');
+		bindChart('consolTxPos', getSelectedDatasets('Taux positivité tests', 'consolTxPos', '#920016'), 'Taux en %');
+		bindChart('r', getSelectedDatasets('R0', 'r', '#923a00'));
+		bindChart('occup', getSelectedDatasets('Capacité en réanimation', 'occup', '#169200'), 'Taux d\'occupation en %');
+
+		bindChart('pop', getSelectedDatasets('Population', 'pop', '#3368d1'));
 	};
 
 	addEventHandler(datasetElem1, 'change', changeFunction);
@@ -100,7 +109,7 @@ function makeDatasets(datasetElem, none = false) {
 	datasetElem.innerHTML = options;
 }
 
-function bindChart(id, datasets) {
+function bindChart(id, datasets, infos = null) {
 	// cleaning previous chart
 	document.getElementById('chart-'+id+'').innerHTML = '<div class="chart-container"></div><div class="chart-info"></div>';
 
@@ -182,5 +191,5 @@ function bindChart(id, datasets) {
 
 	const chart = c3.generate(options);
 
-	document.querySelector('#chart-'+id+' .chart-info').innerHTML = 'Données : '+xs[start+1]+' - '+xs[end+1];
+	document.querySelector('#chart-'+id+' .chart-info').innerHTML = ((infos !== null) ? infos + ' - ' : '') + 'Données : '+xs[start+1]+' - '+xs[end+1];
 }

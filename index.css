@@ -18,6 +18,11 @@ body {
 	border: 1px solid #111111;
 }
 
+h2 {
+	margin: 20px;
+	margin-bottom: 0;
+}
+
 #charts {
 	padding: 10px;
 	margin: 0 auto;
