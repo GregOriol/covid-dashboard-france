@@ -11,3 +11,4 @@ cache/*
 node_modules
 vendor
 !docs/node_modules
+index.html
