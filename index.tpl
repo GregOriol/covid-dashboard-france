@@ -39,26 +39,6 @@
 		<div class="chart" id="chart-incidence-dc"></div>
 	</div>
 
-	<div class="charts clearfix">
-		<div class="selector">
-			Par tranche d'âge: <br>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-09" id="age-hosp-09" checked="checked"><label for="age-hosp-09">0-9 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-19" id="age-hosp-19" checked="checked"><label for="age-hosp-19">10-19 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-29" id="age-hosp-29" checked="checked"><label for="age-hosp-29">20-29 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-39" id="age-hosp-39" checked="checked"><label for="age-hosp-39">30-39 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-49" id="age-hosp-49" checked="checked"><label for="age-hosp-49">40-49 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-59" id="age-hosp-59" checked="checked"><label for="age-hosp-59">50-59 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-69" id="age-hosp-69" checked="checked"><label for="age-hosp-69">60-69 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-79" id="age-hosp-79" checked="checked"><label for="age-hosp-79">70-79 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-89" id="age-hosp-89" checked="checked"><label for="age-hosp-89">80-89 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-hosp-90" id="age-hosp-90" checked="checked"><label for="age-hosp-90">90+ ans</label></div>
-		</div>
-		<div class="chart" id="chart-age-hosp"></div>
-		<div class="chart" id="chart-age-rea"></div>
-		<div class="chart" id="chart-age-rad"></div>
-		<div class="chart" id="chart-age-dc"></div>
-	</div>
-
 	<h2>Tests et incidence</h2>
 	<div class="charts clearfix">
 		<div class="chart" id="chart-t"></div>
@@ -67,6 +47,27 @@
 		<div class="chart" id="chart-txPos7"></div>
 		<div class="chart" id="chart-tx"></div>
 		<div class="chart" id="chart-tx7"></div>
+	</div>
+
+	<h2>Par classe d'âge</h2>
+	<div class="charts clearfix">
+		<div class="selector">
+			<div class="checkbox"><input type="checkbox" name="age-09" id="age-09" checked="checked"><label for="age-09">0-9 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-19" id="age-19" checked="checked"><label for="age-19">10-19 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-29" id="age-29" checked="checked"><label for="age-29">20-29 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-39" id="age-39" checked="checked"><label for="age-39">30-39 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-49" id="age-49" checked="checked"><label for="age-49">40-49 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-59" id="age-59" checked="checked"><label for="age-59">50-59 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-69" id="age-69" checked="checked"><label for="age-69">60-69 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-79" id="age-79" checked="checked"><label for="age-79">70-79 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-89" id="age-89" checked="checked"><label for="age-89">80-89 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-90" id="age-90" checked="checked"><label for="age-90">90+ ans</label></div>
+		</div>
+		<div class="chart" id="chart-age-hosp"></div>
+		<div class="chart" id="chart-age-rea"></div>
+		<div class="chart" id="chart-age-rad"></div>
+		<div class="chart" id="chart-age-dc"></div>
+		<div class="chart" id="chart-age-p"></div>
 	</div>
 
 	<h2>Indicateurs de suivi de l’épidémie</h2>

@@ -15,6 +15,7 @@ require_once 'src/CovidDashboardFrance/Populators/HospTotal.php';
 require_once 'src/CovidDashboardFrance/Populators/HospIncidence.php';
 require_once 'src/CovidDashboardFrance/Populators/HospAge.php';
 require_once 'src/CovidDashboardFrance/Populators/Tests.php';
+require_once 'src/CovidDashboardFrance/Populators/TestsAge.php';
 require_once 'src/CovidDashboardFrance/Populators/Capa.php';
 require_once 'src/CovidDashboardFrance/Populators/Indicateurs.php';
 
@@ -63,6 +64,10 @@ $france = new \CovidDashboardFrance\France($depatmentsDataUrl, $regionsDataUrl);
 // https://www.data.gouv.fr/fr/datasets/r/23066f40-ddd2-40c9-931c-4257f36ad778 sp-pe-std-quot-reg-*.csv
 // https://www.data.gouv.fr/fr/datasets/r/59ad717b-b64e-4779-85f6-cd1b25b24703 sp-pe-std-quot-fra-*.csv
 //
+// https://www.data.gouv.fr/fr/datasets/r/19a91d64-3cd3-42fc-9943-d635491a4d76 sp-pe-tb-quot-dep-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/ad09241e-52fa-4be8-8298-e5760b43cae2 sp-pe-tb-quot-reg-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/57d44bd6-c9fd-424f-9a72-7834454f9e3c sp-pe-tb-quot-fra-*.csv
+//
 // - https://www.data.gouv.fr/fr/datasets/capacite-analytique-de-tests-virologiques-dans-le-cadre-de-lepidemie-covid-19
 // https://www.data.gouv.fr/fr/datasets/r/0c230dc3-2d51-4f17-be97-aa9938564b39 sp-capa-quot-dep-*.csv
 // https://www.data.gouv.fr/fr/datasets/r/21ff3134-c37c-41ef-bb3d-fbea5f6d4a28 sp-capa-quot-reg-*.csv
@@ -79,6 +84,9 @@ $hospAgeDataUrl       = 'https://www.data.gouv.fr/fr/datasets/r/08c18e08-6780-45
 $testsDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4180a181-a648-402b-92e4-f7574647afa6';
 $testsRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/23066f40-ddd2-40c9-931c-4257f36ad778';
 $testsFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/59ad717b-b64e-4779-85f6-cd1b25b24703';
+$testsAgeDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/19a91d64-3cd3-42fc-9943-d635491a4d76';
+$testsAgeRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/ad09241e-52fa-4be8-8298-e5760b43cae2';
+$testsAgeFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/57d44bd6-c9fd-424f-9a72-7834454f9e3c';
 $capaDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/0c230dc3-2d51-4f17-be97-aa9938564b39';
 $capaRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/21ff3134-c37c-41ef-bb3d-fbea5f6d4a28';
 $capaFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/44b46964-8583-4f18-b93f-80fefcbf3b74';
@@ -126,6 +134,27 @@ if (!file_exists($cachedTestsFraDataPath)) {
     file_put_contents($cachedTestsFraDataPath, $contents);
 }
 $testsFraDataUrl = $cachedTestsFraDataPath;
+
+$cachedTestsAgeDepDataPath = './cache/tests-age-dep.csv';
+if (!file_exists($cachedTestsAgeDepDataPath)) {
+    $contents = file_get_contents($testsAgeDepDataUrl);
+    file_put_contents($cachedTestsAgeDepDataPath, $contents);
+}
+$testsAgeDepDataUrl = $cachedTestsAgeDepDataPath;
+
+$cachedTestsAgeRegDataPath = './cache/tests-age-reg.csv';
+if (!file_exists($cachedTestsAgeRegDataPath)) {
+    $contents = file_get_contents($testsAgeRegDataUrl);
+    file_put_contents($cachedTestsAgeRegDataPath, $contents);
+}
+$testsAgeRegDataUrl = $cachedTestsAgeRegDataPath;
+
+$cachedTestsAgeFraDataPath = './cache/tests-age-fra.csv';
+if (!file_exists($cachedTestsAgeFraDataPath)) {
+    $contents = file_get_contents($testsAgeFraDataUrl);
+    file_put_contents($cachedTestsAgeFraDataPath, $contents);
+}
+$testsAgeFraDataUrl = $cachedTestsAgeFraDataPath;
 
 $cachedCapaDepDataPath = './cache/capa-dep.csv';
 if (!file_exists($cachedCapaDepDataPath)) {
@@ -182,6 +211,10 @@ $populator = new \CovidDashboardFrance\Populators\Tests($france, $covid);
 $populator->populateData($testsDepDataUrl, $testsRegDataUrl, $testsFraDataUrl);
 $populator->generateConsolidations();
 
+$populator = new \CovidDashboardFrance\Populators\TestsAge($france, $covid);
+$populator->populateData($testsAgeDepDataUrl, $testsAgeRegDataUrl, $testsAgeFraDataUrl);
+$populator->generateConsolidations();
+
 $populator = new \CovidDashboardFrance\Populators\Capa($france, $covid);
 $populator->populateData($capaDepDataUrl, $capaRegDataUrl, $capaFraDataUrl);
 $populator->generateConsolidations();
@@ -205,6 +238,7 @@ Helpers::agesIterator(function ($age) use (&$indicators) {
     $indicators[] = 'ageRea'.$age;
     $indicators[] = 'ageRad'.$age;
     $indicators[] = 'ageDc'.$age;
+    $indicators[] = 'ageP'.$age;
 });
 
 $output = array(

@@ -127,6 +127,28 @@ class Data
     /** @var float|null Taux positivité tests sur une semaine */
     public $txPos7 = null;
 
+
+    /** @var int|null */
+    public $ageP09 = null;
+    /** @var int|null */
+    public $ageP19 = null;
+    /** @var int|null */
+    public $ageP29 = null;
+    /** @var int|null */
+    public $ageP39 = null;
+    /** @var int|null */
+    public $ageP49 = null;
+    /** @var int|null */
+    public $ageP59 = null;
+    /** @var int|null */
+    public $ageP69 = null;
+    /** @var int|null */
+    public $ageP79 = null;
+    /** @var int|null */
+    public $ageP89 = null;
+    /** @var int|null */
+    public $ageP90 = null;
+
     /** @var float|null Taux incidence tests consolidé */
     public $consolTx = null;
     /** @var float|null Taux positivité tests consolidé */
