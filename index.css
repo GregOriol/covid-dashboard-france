@@ -51,6 +51,19 @@ h2 {
 	text-align: right;
 }
 
+.selector {
+	width: 100%;
+	margin: 0 10px;
+}
+.checkbox {
+	display: inline-block;
+	margin-right: 15px;
+	margin-bottom: 5px;
+}
+input[type="checkbox"] {
+	margin-right: 5px;
+}
+
 .sources {
 	margin: 20px;
 }

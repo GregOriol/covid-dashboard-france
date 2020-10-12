@@ -46,10 +46,10 @@ domReady(() => {
 		bindChart('rad', getSelectedDatasets('Rad', 'rad', '#03BD5B'), 'bar');
 		bindChart('dc', getSelectedDatasets('Dc', 'dc', '#D1335B'), 'bar');
 
-		bindChart('incidence-hosp', getSelectedDatasets('Incidence hosp', 'incidenceHosp', '#8393A7'), 'line');
-		bindChart('incidence-rea', getSelectedDatasets('Incidence rea', 'incidenceRea', '#03539d'), 'line');
-		bindChart('incidence-rad', getSelectedDatasets('Incidence rad', 'incidenceRad', '#03BD5B'), 'line');
-		bindChart('incidence-dc', getSelectedDatasets('Incidence dc', 'incidenceDc', '#D1335B'), 'line');
+		bindChart('incidence-hosp', getSelectedDatasets('HospIncidence hosp', 'incidenceHosp', '#8393A7'), 'line');
+		bindChart('incidence-rea', getSelectedDatasets('HospIncidence rea', 'incidenceRea', '#03539d'), 'line');
+		bindChart('incidence-rad', getSelectedDatasets('HospIncidence rad', 'incidenceRad', '#03BD5B'), 'line');
+		bindChart('incidence-dc', getSelectedDatasets('HospIncidence dc', 'incidenceDc', '#D1335B'), 'line');
 
 		bindChart('t', getSelectedDatasets('Tests réalisés', 't', '#4864cd'), 'bar');
 		bindChart('p', getSelectedDatasets('Tests positifs', 'p', '#D1335B'), 'bar');

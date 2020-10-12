@@ -31,6 +31,87 @@ class Data
     /** @var int|null */
     public $incidenceDc = null;
 
+    /** @var int|null */
+    public $ageHosp09 = null;
+    /** @var int|null */
+    public $ageHosp19 = null;
+    /** @var int|null */
+    public $ageHosp29 = null;
+    /** @var int|null */
+    public $ageHosp39 = null;
+    /** @var int|null */
+    public $ageHosp49 = null;
+    /** @var int|null */
+    public $ageHosp59 = null;
+    /** @var int|null */
+    public $ageHosp69 = null;
+    /** @var int|null */
+    public $ageHosp79 = null;
+    /** @var int|null */
+    public $ageHosp89 = null;
+    /** @var int|null */
+    public $ageHosp90 = null;
+    /** @var int|null */
+    public $ageRea09 = null;
+    /** @var int|null */
+    public $ageRea19 = null;
+    /** @var int|null */
+    public $ageRea29 = null;
+    /** @var int|null */
+    public $ageRea39 = null;
+    /** @var int|null */
+    public $ageRea49 = null;
+    /** @var int|null */
+    public $ageRea59 = null;
+    /** @var int|null */
+    public $ageRea69 = null;
+    /** @var int|null */
+    public $ageRea79 = null;
+    /** @var int|null */
+    public $ageRea89 = null;
+    /** @var int|null */
+    public $ageRea90 = null;
+    /** @var int|null */
+    public $ageRad09 = null;
+    /** @var int|null */
+    public $ageRad19 = null;
+    /** @var int|null */
+    public $ageRad29 = null;
+    /** @var int|null */
+    public $ageRad39 = null;
+    /** @var int|null */
+    public $ageRad49 = null;
+    /** @var int|null */
+    public $ageRad59 = null;
+    /** @var int|null */
+    public $ageRad69 = null;
+    /** @var int|null */
+    public $ageRad79 = null;
+    /** @var int|null */
+    public $ageRad89 = null;
+    /** @var int|null */
+    public $ageRad90 = null;
+    /** @var int|null */
+    public $ageDc09 = null;
+    /** @var int|null */
+    public $ageDc19 = null;
+    /** @var int|null */
+    public $ageDc29 = null;
+    /** @var int|null */
+    public $ageDc39 = null;
+    /** @var int|null */
+    public $ageDc49 = null;
+    /** @var int|null */
+    public $ageDc59 = null;
+    /** @var int|null */
+    public $ageDc69 = null;
+    /** @var int|null */
+    public $ageDc79 = null;
+    /** @var int|null */
+    public $ageDc89 = null;
+    /** @var int|null */
+    public $ageDc90 = null;
+
     /** @var int|null Population */
     public $pop = null;
     /** @var int|null Nb tests positifs */
@@ -56,7 +137,7 @@ class Data
     public $occup = null;
 
     /**
-     * Total constructor.
+     * HospTotal constructor.
      *
      * @param \DateTime   $date
      * @param string      $country

@@ -28,4 +28,11 @@ class Helpers
             $callback($date);
         }
     }
+
+    public static function agesIterator($callback)
+    {
+        foreach (['09', '19', '29', '39', '49', '59', '69', '79', '89', '90'] as $age) {
+            $callback($age);
+        }
+    }
 }
