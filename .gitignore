@@ -5,10 +5,7 @@
 .bundle
 
 # Project cache files
-depts.zip
-regs.zip
-total.csv
-incidence.csv
+cache/*
 
 # Project generated files
 node_modules
