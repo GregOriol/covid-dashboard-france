@@ -25,14 +25,14 @@
 	</div>
 
 	<h2>Données hospitalières</h2>
-	<div id="charts" class="clearfix">
+	<div class="charts clearfix">
 		<div class="chart" id="chart-hosp"></div>
 		<div class="chart" id="chart-rea"></div>
 		<div class="chart" id="chart-rad"></div>
 		<div class="chart" id="chart-dc"></div>
 	</div>
 
-	<div id="charts" class="clearfix">
+	<div class="charts clearfix">
 		<div class="chart" id="chart-incidence-hosp"></div>
 		<div class="chart" id="chart-incidence-rea"></div>
 		<div class="chart" id="chart-incidence-rad"></div>
@@ -40,7 +40,7 @@
 	</div>
 
 	<h2>Tests et incidence</h2>
-	<div id="charts" class="clearfix">
+	<div class="charts clearfix">
 		<div class="chart" id="chart-t"></div>
 		<div class="chart" id="chart-p"></div>
 		<div class="chart" id="chart-txPos"></div>
@@ -50,7 +50,7 @@
 	</div>
 
 	<h2>Indicateurs de suivi de l’épidémie</h2>
-	<div id="charts" class="clearfix">
+	<div class="charts clearfix">
 		<div class="chart" id="chart-consolTx"></div>
 		<div class="chart" id="chart-consolTxPos"></div>
 		<div class="chart" id="chart-r"></div>
@@ -58,8 +58,22 @@
 	</div>
 
 	<h2>Divers</h2>
-	<div id="charts" class="clearfix">
+	<div class="charts clearfix">
 		<div class="chart" id="chart-pop"></div>
+	</div>
+
+	<h2>Sources</h2>
+	<div class="sources">
+		<dl>
+			<dt>* Données hospitalières relatives à l'épidémie de COVID-19 - Santé publique France</dt>
+			<dd><a href="https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19" target="_blank" rel="noopener noreferrer">https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19</a></dd>
+			<dt>* Taux d'incidence de l'épidémie de COVID-19 (SI-DEP) - Santé publique France</dt>
+			<dd><a href="https://www.data.gouv.fr/fr/datasets/taux-dincidence-de-lepidemie-de-covid-19" target="_blank" rel="noopener noreferrer">https://www.data.gouv.fr/fr/datasets/taux-dincidence-de-lepidemie-de-covid-19</a></dd>
+			<dt>* Capacité analytique de tests virologiques dans le cadre de l'épidémie COVID-19 (SI-DEP) - Santé publique France</dt>
+			<dd><a href="https://www.data.gouv.fr/fr/datasets/capacite-analytique-de-tests-virologiques-dans-le-cadre-de-lepidemie-covid-19" target="_blank" rel="noopener noreferrer">https://www.data.gouv.fr/fr/datasets/capacite-analytique-de-tests-virologiques-dans-le-cadre-de-lepidemie-covid-19</a></dd>
+			<dt>* Indicateurs de suivi de l’épidémie de COVID-19 - Ministère des Solidarités et de la Santé</dt>
+			<dd><a href="https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19" target="_blank" rel="noopener noreferrer">https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19</a></dd>
+		</dl>
 	</div>
 
 	<script type="text/javascript">

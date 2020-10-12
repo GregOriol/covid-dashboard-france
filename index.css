@@ -23,7 +23,7 @@ h2 {
 	margin-bottom: 0;
 }
 
-#charts {
+.charts {
 	padding: 10px;
 	margin: 0 auto;
 }
@@ -49,4 +49,11 @@ h2 {
 .chart-info {
 	font-size: 9px;
 	text-align: right;
+}
+
+.sources {
+	margin: 20px;
+}
+.sources dd {
+	margin-inline-start: 0;
 }
