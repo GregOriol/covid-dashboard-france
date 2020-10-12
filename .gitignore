@@ -10,3 +10,4 @@ cache/*
 # Project generated files
 node_modules
 vendor
+!docs/node_modules
