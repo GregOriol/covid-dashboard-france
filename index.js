@@ -41,29 +41,29 @@ domReady(() => {
 	}
 
 	const changeFunction = function() {
-		bindChart('hosp', getSelectedDatasets('Hosp', 'hosp', '#8393A7'));
-		bindChart('rea', getSelectedDatasets('Réa', 'rea', '#03539d'));
-		bindChart('rad', getSelectedDatasets('Rad', 'rad', '#03BD5B'));
-		bindChart('dc', getSelectedDatasets('Dc', 'dc', '#D1335B'));
+		bindChart('hosp', getSelectedDatasets('Hosp', 'hosp', '#8393A7'), 'bar');
+		bindChart('rea', getSelectedDatasets('Réa', 'rea', '#03539d'), 'bar');
+		bindChart('rad', getSelectedDatasets('Rad', 'rad', '#03BD5B'), 'bar');
+		bindChart('dc', getSelectedDatasets('Dc', 'dc', '#D1335B'), 'bar');
 
-		bindChart('incidence-hosp', getSelectedDatasets('Incidence hosp', 'incidenceHosp', '#8393A7'));
-		bindChart('incidence-rea', getSelectedDatasets('Incidence rea', 'incidenceRea', '#03539d'));
-		bindChart('incidence-rad', getSelectedDatasets('Incidence rad', 'incidenceRad', '#03BD5B'));
-		bindChart('incidence-dc', getSelectedDatasets('Incidence dc', 'incidenceDc', '#D1335B'));
+		bindChart('incidence-hosp', getSelectedDatasets('Incidence hosp', 'incidenceHosp', '#8393A7'), 'line');
+		bindChart('incidence-rea', getSelectedDatasets('Incidence rea', 'incidenceRea', '#03539d'), 'line');
+		bindChart('incidence-rad', getSelectedDatasets('Incidence rad', 'incidenceRad', '#03BD5B'), 'line');
+		bindChart('incidence-dc', getSelectedDatasets('Incidence dc', 'incidenceDc', '#D1335B'), 'line');
 
-		bindChart('t', getSelectedDatasets('Tests réalisés', 't', '#4864cd'));
-		bindChart('p', getSelectedDatasets('Tests positifs', 'p', '#D1335B'));
-		bindChart('tx', getSelectedDatasets('Tests incidence quotidien', 'tx', '#ba8c11'), 'Taux de tests positifs pour 100\'000 personnes');
-		bindChart('tx7', getSelectedDatasets('Tests incidence semaine', 'tx7', '#ba8c11'), 'Taux de tests positifs pour 100\'000 personnes sur une semaine');
-		bindChart('txPos', getSelectedDatasets('Tests positivité quotidien', 'txPos', '#7f11ba'), '% de tests positifs');
-		bindChart('txPos7', getSelectedDatasets('Tests positivité semaine', 'txPos7', '#7f11ba'), '% de tests positifs sur une semaine');
+		bindChart('t', getSelectedDatasets('Tests réalisés', 't', '#4864cd'), 'bar');
+		bindChart('p', getSelectedDatasets('Tests positifs', 'p', '#D1335B'), 'bar');
+		bindChart('tx', getSelectedDatasets('Tests incidence quotidien', 'tx', '#ba8c11'), 'line', 'Taux de tests positifs pour 100\'000 personnes');
+		bindChart('tx7', getSelectedDatasets('Tests incidence semaine', 'tx7', '#ba8c11'), 'line', 'Taux de tests positifs pour 100\'000 personnes sur une semaine');
+		bindChart('txPos', getSelectedDatasets('Tests positivité quotidien', 'txPos', '#7f11ba'), 'line', '% de tests positifs');
+		bindChart('txPos7', getSelectedDatasets('Tests positivité semaine', 'txPos7', '#7f11ba'), 'line', '% de tests positifs sur une semaine');
 
-		bindChart('consolTx', getSelectedDatasets('Taux incidence', 'consolTx', '#004192'), 'Taux en %');
-		bindChart('consolTxPos', getSelectedDatasets('Taux positivité tests', 'consolTxPos', '#920016'), 'Taux en %');
-		bindChart('r', getSelectedDatasets('R0', 'r', '#923a00'));
-		bindChart('occup', getSelectedDatasets('Capacité en réanimation', 'occup', '#169200'), 'Taux d\'occupation en %');
+		bindChart('consolTx', getSelectedDatasets('Taux incidence', 'consolTx', '#004192'), 'line', 'Taux en %');
+		bindChart('consolTxPos', getSelectedDatasets('Taux positivité tests', 'consolTxPos', '#920016'), 'line', 'Taux en %');
+		bindChart('r', getSelectedDatasets('R0', 'r', '#923a00'), 'line');
+		bindChart('occup', getSelectedDatasets('Capacité en réanimation', 'occup', '#169200'), 'line', 'Taux d\'occupation en %');
 
-		bindChart('pop', getSelectedDatasets('Population', 'pop', '#3368d1'));
+		bindChart('pop', getSelectedDatasets('Population', 'pop', '#3368d1'), 'line');
 	};
 
 	addEventHandler(datasetElem1, 'change', changeFunction);
@@ -109,18 +109,13 @@ function makeDatasets(datasetElem, none = false) {
 	datasetElem.innerHTML = options;
 }
 
-function bindChart(id, datasets, infos = null) {
+function bindChart(id, datasets, type = 'bar', infos = null) {
 	// cleaning previous chart
 	document.getElementById('chart-'+id+'').innerHTML = '<div class="chart-container"></div><div class="chart-info"></div>';
 
 	// preparing data
 	const xs = [...data['x']];
 	xs.unshift('x');
-
-	let type = 'bar';
-	if (id === 'pop') {
-		type = 'line';
-	}
 
 	const options = {
 		bindto: '#chart-'+id+' .chart-container',
@@ -162,6 +157,9 @@ function bindChart(id, datasets, infos = null) {
 				ratio: 0.5
 			}
 		},
+		point: {
+			r: 1.5
+		}
 		// legend: {
 		// 	show: false
 		// },
