@@ -54,7 +54,7 @@ domReady(() => {
 		bindChart('t', 'Tests réalisés', getSelectedDatasets('t', '#4864cd'), 'bar');
 		bindChart('p', 'Tests positifs', getSelectedDatasets('p', '#D1335B'), 'bar');
 		bindChart('tx', 'Taux d\'incidence quotidien', getSelectedDatasets('tx', '#ba8c11'), 'line', 'Positifs pour 100\'000 habitants');
-		bindChart('tx7', 'Taux incidence semaine', getSelectedDatasets('tx7', '#ba8c11'), 'line', 'Positifs pour 100\'000 habitants sur une semaine');
+		bindChart('tx7', 'Taux d\'incidence semaine', getSelectedDatasets('tx7', '#ba8c11'), 'line', 'Positifs pour 100\'000 habitants sur une semaine');
 		bindChart('txPos', 'Taux de positivité quotidien', getSelectedDatasets('txPos', '#7f11ba'), 'line', '% positifs');
 		bindChart('txPos7', 'Taux de positivité semaine', getSelectedDatasets('txPos7', '#7f11ba'), 'line', '% positifs sur une semaine');
 
@@ -142,10 +142,10 @@ domReady(() => {
 			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc90', '#F5AA85', '90+'));
 			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP90', '#F5AA85', '90+'));
 		}
-		bindChart('age-hosp', 'Hosp', ageHospDatasets, 'line');
-		bindChart('age-rea', 'Réa', ageReaDatasets, 'line');
-		bindChart('age-rad', 'Rad', ageRadDatasets, 'line');
-		bindChart('age-dc', 'Dc', ageDcDatasets, 'line');
+		bindChart('age-hosp', 'Hospitalisations', ageHospDatasets, 'line');
+		bindChart('age-rea', 'Réanimation ou soins intensifs', ageReaDatasets, 'line');
+		bindChart('age-rad', 'Retours cumulés à domicile', ageRadDatasets, 'line');
+		bindChart('age-dc', 'Décès cumulés à l\'hôpital', ageDcDatasets, 'line');
 		bindChart('age-p', 'Tests positifs', agePDatasets, 'line');
 	};
 
