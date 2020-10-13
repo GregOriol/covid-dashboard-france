@@ -1,5 +1,5 @@
 # covid-dashboard-france
-PHP 7.1+ / js code to display public covid data in France
+PHP/JS code to display public covid data in France.
 
 Published at: https://gregoriol.github.io/covid-dashboard-france/
 
