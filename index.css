@@ -79,3 +79,16 @@ input[type="checkbox"] {
 .sources dd {
 	margin-inline-start: 0;
 }
+
+.chart svg .y-line-red line {
+	stroke: #ff4040;
+}
+.chart svg .y-line-red text {
+	fill: #ff4040;
+}
+.chart svg .y-line-orange line {
+	stroke: #ffa500;
+}
+.chart svg .y-line-orange text {
+	fill: #ffa500;
+}
