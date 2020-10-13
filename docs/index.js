@@ -257,10 +257,26 @@ function bindChart(id, name, datasets, type = 'bar', infos = null) {
 		point: {
 			r: 1.5
 		},
-		// legend: {
-		// 	show: false
-		// },
+		grid: {
+			y: {
+				lines: []
+			}
+		},
 	};
+
+	if (id === 'consolTx') {
+		options['grid']['y']['lines'].push({value: 10, text: 'orange', class: 'y-line-orange'});
+		options['grid']['y']['lines'].push({value: 50, text: 'rouge', class: 'y-line-red'});
+	} else if (id === 'consolTxPos') {
+		options['grid']['y']['lines'].push({value: 5, text: 'orange', class: 'y-line-orange'});
+		options['grid']['y']['lines'].push({value: 10, text: 'rouge', class: 'y-line-red'});
+	} else if (id === 'r') {
+		options['grid']['y']['lines'].push({value: 1, text: 'orange', class: 'y-line-orange'});
+		options['grid']['y']['lines'].push({value: 1.5, text: 'rouge', class: 'y-line-red'});
+	} else if (id === 'occup') {
+		options['grid']['y']['lines'].push({value: 40, text: 'orange', class: 'y-line-orange'});
+		options['grid']['y']['lines'].push({value: 60, text: 'rouge', class: 'y-line-red'});
+	}
 
 	let start = null;
 	let end = null;
