@@ -251,9 +251,12 @@ function bindChart(id, datasets, type = 'bar', infos = null) {
 				ratio: 0.5
 			}
 		},
+		line: {
+			connectNull: true
+		},
 		point: {
 			r: 1.5
-		}
+		},
 		// legend: {
 		// 	show: false
 		// },
