@@ -22,7 +22,7 @@ domReady(() => {
 	makeDatasets(datasetElem2, true);
 	makeDatasets(datasetElem3, true);
 
-	const getSelectedDatasets = function(name, dataType, color) {
+	const getSelectedDatasets = function(dataType, color, name = null) {
 		const selectedData = [];
 
 		color = tinycolor(color);
@@ -30,7 +30,7 @@ domReady(() => {
 		for (const [_, datasetElem] of Object.entries([datasetElem1, datasetElem2, datasetElem3])) {
 			if (datasetElem.value === 'none') { continue; }
 
-			selectedData.push({name: name + ' ' + datasetElem.options[datasetElem.selectedIndex].text, data: data[datasetElem.value][dataType], color: color.toString()});
+			selectedData.push({name: (name ? name + ' ' : '') + datasetElem.options[datasetElem.selectedIndex].text, data: data[datasetElem.value][dataType], color: color.toString()});
 
 			color.spin(36);
 		}
@@ -39,31 +39,31 @@ domReady(() => {
 	}
 
 	const changeFunction = function() {
-		bindChart('hosp', getSelectedDatasets('Hosp', 'hosp', '#8393A7'), 'bar');
-		bindChart('rea', getSelectedDatasets('Réa', 'rea', '#03539d'), 'bar');
-		bindChart('rad', getSelectedDatasets('Rad', 'rad', '#03BD5B'), 'bar');
-		bindChart('dc', getSelectedDatasets('Dc', 'dc', '#D1335B'), 'bar');
+		bindChart('hosp', 'Hospitalisations', getSelectedDatasets('hosp', '#8393A7'), 'bar');
+		bindChart('rea', 'Réanimation ou soins intensifs', getSelectedDatasets('rea', '#03539d'), 'bar');
+		bindChart('rad', 'Retours cumulés à domicile', getSelectedDatasets('rad', '#03BD5B'), 'bar');
+		bindChart('dc', 'Décès cumulés à l\'hôpital', getSelectedDatasets('dc', '#D1335B'), 'bar');
 
-		bindChart('incidence-hosp', getSelectedDatasets('HospIncidence hosp', 'incidenceHosp', '#8393A7'), 'line');
-		bindChart('incidence-rea', getSelectedDatasets('HospIncidence rea', 'incidenceRea', '#03539d'), 'line');
-		bindChart('incidence-rad', getSelectedDatasets('HospIncidence rad', 'incidenceRad', '#03BD5B'), 'line');
-		bindChart('incidence-dc', getSelectedDatasets('HospIncidence dc', 'incidenceDc', '#D1335B'), 'line');
+		bindChart('incidence-hosp', 'Nouvelles hospitalisations', getSelectedDatasets('incidenceHosp', '#8393A7'), 'line');
+		bindChart('incidence-rea', 'Nouvelles admissions en réanimation', getSelectedDatasets('incidenceRea', '#03539d'), 'line');
+		bindChart('incidence-rad', 'Nouveaux retours à domicile', getSelectedDatasets('incidenceRad', '#03BD5B'), 'line');
+		bindChart('incidence-dc', 'Nouveaux décès', getSelectedDatasets('incidenceDc', '#D1335B'), 'line');
 
 		changeAgeFunction();
 
-		bindChart('t', getSelectedDatasets('Tests réalisés', 't', '#4864cd'), 'bar');
-		bindChart('p', getSelectedDatasets('Tests positifs', 'p', '#D1335B'), 'bar');
-		bindChart('tx', getSelectedDatasets('Tests incidence quotidien', 'tx', '#ba8c11'), 'line', 'Nombre de tests positifs pour 100\'000 habitants');
-		bindChart('tx7', getSelectedDatasets('Tests incidence semaine', 'tx7', '#ba8c11'), 'line', 'Nombre de tests positifs pour 100\'000 habitants sur une semaine');
-		bindChart('txPos', getSelectedDatasets('Tests positivité quotidien', 'txPos', '#7f11ba'), 'line', '% de tests positifs');
-		bindChart('txPos7', getSelectedDatasets('Tests positivité semaine', 'txPos7', '#7f11ba'), 'line', '% de tests positifs sur une semaine');
+		bindChart('t', 'Tests réalisés', getSelectedDatasets('t', '#4864cd'), 'bar');
+		bindChart('p', 'Tests positifs', getSelectedDatasets('p', '#D1335B'), 'bar');
+		bindChart('tx', 'Taux d\'incidence quotidien', getSelectedDatasets('tx', '#ba8c11'), 'line', 'Positifs pour 100\'000 habitants');
+		bindChart('tx7', 'Taux incidence semaine', getSelectedDatasets('tx7', '#ba8c11'), 'line', 'Positifs pour 100\'000 habitants sur une semaine');
+		bindChart('txPos', 'Taux de positivité quotidien', getSelectedDatasets('txPos', '#7f11ba'), 'line', '% positifs');
+		bindChart('txPos7', 'Taux de positivité semaine', getSelectedDatasets('txPos7', '#7f11ba'), 'line', '% positifs sur une semaine');
 
-		bindChart('consolTx', getSelectedDatasets('Taux incidence', 'consolTx', '#004192'), 'line', 'Nombre de tests positifs pour 100\'000 habitants sur une semaine');
-		bindChart('consolTxPos', getSelectedDatasets('Taux positivité tests', 'consolTxPos', '#920016'), 'line', '% de tests positifs sur une semaine');
-		bindChart('r', getSelectedDatasets('R0', 'r', '#923a00'), 'line', 'Région/pays uniquement');
-		bindChart('occup', getSelectedDatasets('Capacité en réanimation', 'occup', '#169200'), 'line', 'Taux d\'occupation en % - région/pays uniquement');
+		bindChart('consolTx', 'Activité épidémique (taux d\'incidence des tests)', getSelectedDatasets('consolTx', '#004192'), 'line', 'Positifs pour 100\'000 habitants sur une semaine');
+		bindChart('consolTxPos', 'Taux de positivité des tests', getSelectedDatasets('consolTxPos', '#920016'), 'line', '% positifs sur une semaine');
+		bindChart('r', 'Facteur de reproduction du virus (R0)', getSelectedDatasets('r', '#923a00'), 'line', 'Région/pays uniquement');
+		bindChart('occup', 'Tension hospitalière sur la capacité en réanimation', getSelectedDatasets('occup', '#169200'), 'line', 'Taux d\'occupation en % - région/pays uniquement');
 
-		bindChart('pop', getSelectedDatasets('Population', 'pop', '#3368d1'), 'line');
+		bindChart('pop', 'Population', getSelectedDatasets('pop', '#3368d1'), 'line');
 	};
 
 	const changeAgeFunction = function() {
@@ -73,80 +73,80 @@ domReady(() => {
 		let ageDcDatasets = [];
 		let agePDatasets = [];
 		if (document.getElementById('age-09').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 0-9', 'ageHosp09', '#66C2A3'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 0-9', 'ageRea09', '#66C2A3'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 0-9', 'ageRad09', '#66C2A3'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 0-9', 'ageDc09', '#66C2A3'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 0-9', 'ageP09', '#66C2A3'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp09', '#66C2A3', '0-9'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea09', '#66C2A3', '0-9'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad09', '#66C2A3', '0-9'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc09', '#66C2A3', '0-9'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP09', '#66C2A3', '0-9'));
 		}
 		if (document.getElementById('age-19').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 10-19', 'ageHosp19', '#5DC2CD'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 10-19', 'ageRea19', '#5DC2CD'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 10-19', 'ageRad19', '#5DC2CD'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 10-19', 'ageDc19', '#5DC2CD'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 10-19', 'ageP19', '#5DC2CD'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp19', '#5DC2CD', '10-19'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea19', '#5DC2CD', '10-19'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad19', '#5DC2CD', '10-19'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc19', '#5DC2CD', '10-19'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP19', '#5DC2CD', '10-19'));
 		}
 		if (document.getElementById('age-29').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 20-29', 'ageHosp29', '#ADBCC3'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 20-29', 'ageRea29', '#ADBCC3'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 20-29', 'ageRad29', '#ADBCC3'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 20-29', 'ageDc29', '#ADBCC3'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 20-29', 'ageP29', '#ADBCC3'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp29', '#ADBCC3', '20-29'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea29', '#ADBCC3', '20-29'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad29', '#ADBCC3', '20-29'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc29', '#ADBCC3', '20-29'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP29', '#ADBCC3', '20-29'));
 		}
 		if (document.getElementById('age-39').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 30-39', 'ageHosp39', '#698CAF'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 30-39', 'ageRea39', '#698CAF'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 30-39', 'ageRad39', '#698CAF'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 30-39', 'ageDc39', '#698CAF'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 30-39', 'ageP39', '#698CAF'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp39', '#698CAF', '30-39'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea39', '#698CAF', '30-39'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad39', '#698CAF', '30-39'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc39', '#698CAF', '30-39'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP39', '#698CAF', '30-39'));
 		}
 		if (document.getElementById('age-49').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 40-49', 'ageHosp49', '#BE9DE2'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 40-49', 'ageRea49', '#BE9DE2'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 40-49', 'ageRad49', '#BE9DE2'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 40-49', 'ageDc49', '#BE9DE2'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 40-49', 'ageP49', '#BE9DE2'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp49', '#BE9DE2', '40-49'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea49', '#BE9DE2', '40-49'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad49', '#BE9DE2', '40-49'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc49', '#BE9DE2', '40-49'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP49', '#BE9DE2', '40-49'));
 		}
 		if (document.getElementById('age-59').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 50-59', 'ageHosp59', '#828AF7'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 50-59', 'ageRea59', '#828AF7'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 50-59', 'ageRad59', '#828AF7'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 50-59', 'ageDc59', '#828AF7'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 50-59', 'ageP59', '#828AF7'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp59', '#828AF7', '50-59'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea59', '#828AF7', '50-59'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad59', '#828AF7', '50-59'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc59', '#828AF7', '50-59'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP59', '#828AF7', '50-59'));
 		}
 		if (document.getElementById('age-69').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 60-69', 'ageHosp69', '#D876C0'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 60-69', 'ageRea69', '#D876C0'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 60-69', 'ageRad69', '#D876C0'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 60-69', 'ageDc69', '#D876C0'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 60-69', 'ageP69', '#D876C0'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp69', '#D876C0', '60-69'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea69', '#D876C0', '60-69'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad69', '#D876C0', '60-69'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc69', '#D876C0', '60-69'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP69', '#D876C0', '60-69'));
 		}
 		if (document.getElementById('age-79').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 70-79', 'ageHosp79', '#F490AE'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 70-79', 'ageRea79', '#F490AE'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 70-79', 'ageRad79', '#F490AE'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 70-79', 'ageDc79', '#F490AE'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 70-79', 'ageP79', '#F490AE'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp79', '#F490AE', '70-79'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea79', '#F490AE', '70-79'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad79', '#F490AE', '70-79'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc79', '#F490AE', '70-79'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP79', '#F490AE', '70-79'));
 		}
 		if (document.getElementById('age-89').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 80-89', 'ageHosp89', '#F8A6A6'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 80-89', 'ageRea89', '#F8A6A6'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 80-89', 'ageRad89', '#F8A6A6'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 80-89', 'ageDc89', '#F8A6A6'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 80-89', 'ageP89', '#F8A6A6'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp89', '#F8A6A6', '80-89'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea89', '#F8A6A6', '80-89'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad89', '#F8A6A6', '80-89'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc89', '#F8A6A6', '80-89'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP89', '#F8A6A6', '80-89'));
 		}
 		if (document.getElementById('age-90').checked) {
-			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('Hosp 90+', 'ageHosp90', '#F5AA85'));
-			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('Réa 90+', 'ageRea90', '#F5AA85'));
-			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('Rad 90+', 'ageRad90', '#F5AA85'));
-			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('Dc 90+', 'ageDc90', '#F5AA85'));
-			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('Tests positifs 90+', 'ageP90', '#F5AA85'));
+			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp90', '#F5AA85', '90+'));
+			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea90', '#F5AA85', '90+'));
+			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad90', '#F5AA85', '90+'));
+			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc90', '#F5AA85', '90+'));
+			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP90', '#F5AA85', '90+'));
 		}
-		bindChart('age-hosp', ageHospDatasets, 'line');
-		bindChart('age-rea', ageReaDatasets, 'line');
-		bindChart('age-rad', ageRadDatasets, 'line');
-		bindChart('age-dc', ageDcDatasets, 'line');
-		bindChart('age-p', agePDatasets, 'line');
+		bindChart('age-hosp', 'Hosp', ageHospDatasets, 'line');
+		bindChart('age-rea', 'Réa', ageReaDatasets, 'line');
+		bindChart('age-rad', 'Rad', ageRadDatasets, 'line');
+		bindChart('age-dc', 'Dc', ageDcDatasets, 'line');
+		bindChart('age-p', 'Tests positifs', agePDatasets, 'line');
 	};
 
 	addEventHandler(datasetElem1, 'change', changeFunction);
@@ -203,9 +203,9 @@ function makeDatasets(datasetElem, none = false) {
 	datasetElem.innerHTML = options;
 }
 
-function bindChart(id, datasets, type = 'bar', infos = null) {
+function bindChart(id, name, datasets, type = 'bar', infos = null) {
 	// cleaning previous chart
-	document.getElementById('chart-'+id+'').innerHTML = '<div class="chart-container"></div><div class="chart-info"></div>';
+	document.getElementById('chart-'+id+'').innerHTML = '<h3>' + name + '</h3><div class="chart-container"></div><div class="chart-info"></div>';
 
 	// preparing data
 	const xs = [...data['x']];
