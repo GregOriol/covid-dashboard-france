@@ -258,6 +258,13 @@ function bindChart(id, name, datasets, type = 'bar', infos = null) {
 			r: 1.5
 		},
 		grid: {
+			x: {
+				lines: [
+					{value: '2020-03-17', text: 'début c1', class: 'x-line-c1-start', position: 'end'},
+					{value: '2020-05-11', text: 'fin c1', class: 'x-line-c1-end', position: 'end'},
+					{value: '2020-10-30', text: 'début c2', class: 'x-line-c2-start', position: 'end'}
+				]
+			},
 			y: {
 				lines: []
 			}
@@ -303,4 +310,7 @@ function bindChart(id, name, datasets, type = 'bar', infos = null) {
 	const chart = c3.generate(options);
 
 	document.querySelector('#chart-'+id+' .chart-info').innerHTML = ((infos !== null) ? infos + ' - ' : '') + 'Données : '+xs[start+1]+' - '+xs[end+1];
+
+	document.querySelector('#chart-'+id+' .x-line-c1-start text').setAttribute('dy', 12); // moving label to the other side of the line
+	document.querySelector('#chart-'+id+' .x-line-c1-end text').setAttribute('dy', 12); // moving label to the other side of the line
 }
