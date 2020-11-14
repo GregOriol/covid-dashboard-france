@@ -262,6 +262,7 @@ function bindChart(id, name, datasets, type = 'bar', infos = null) {
 				lines: [
 					{value: '2020-03-17', text: 'début c1', class: 'x-line-c1-start', position: 'end'},
 					{value: '2020-05-11', text: 'fin c1', class: 'x-line-c1-end', position: 'end'},
+					{value: '2020-10-17', text: 'début cf', class: 'x-line-c2-start', position: 'end'},
 					{value: '2020-10-30', text: 'début c2', class: 'x-line-c2-start', position: 'end'}
 				]
 			},
