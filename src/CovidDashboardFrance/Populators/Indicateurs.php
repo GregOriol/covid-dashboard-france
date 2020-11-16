@@ -82,13 +82,13 @@ class Indicateurs
             $regData = $this->covid->getDataForDate($date, 'FRA', $region->number, null);
             if (!$regData) { continue; }
 
-            $depData->consolTx = ($tx !== 'NA') ? (float)$tx : null;
-            $depData->consolTxPos = ($txPos !== 'NA') ? (float)$txPos : null;
-            $depData->r = ($r !== 'NA') ? (float)$r : null;
-            $depData->occup = ($occup !== 'NA') ? (float)$occup : null;
+            $depData->consolTx = ($tx !== 'NA' && $tx !== '') ? (float)$tx : null;
+            $depData->consolTxPos = ($txPos !== 'NA' && $txPos !== '') ? (float)$txPos : null;
+            $depData->r = ($r !== 'NA' && $r !== '') ? (float)$r : null;
+            $depData->occup = ($occup !== 'NA' && $occup !== '') ? (float)$occup : null;
 
-            $regData->r = ($r !== 'NA') ? (float)$r : null;
-            $regData->occup = ($occup !== 'NA') ? (float)$occup : null;
+            $regData->r = ($r !== 'NA' && $r !== '') ? (float)$r : null;
+            $regData->occup = ($occup !== 'NA' && $occup !== '') ? (float)$occup : null;
         }
 
         //
@@ -120,10 +120,10 @@ class Indicateurs
             $data = $this->covid->getDataForDate($date, 'FRA', null, null);
             if (!$data) { continue; }
 
-            $data->consolTx = ($tx !== 'NA') ? (float)$tx : null;
-            $data->consolTxPos = ($txPos !== 'NA') ? (float)$txPos : null;
-            $data->r = ($r !== 'NA') ? (float)$r : null;
-            $data->occup = ($occup !== 'NA') ? (float)$occup : null;
+            $data->consolTx = ($tx !== 'NA' && $tx !== '') ? (float)$tx : null;
+            $data->consolTxPos = ($txPos !== 'NA' && $txPos !== '') ? (float)$txPos : null;
+            $data->r = ($r !== 'NA' && $r !== '') ? (float)$r : null;
+            $data->occup = ($occup !== 'NA' && $occup !== '') ? (float)$occup : null;
         }
     }
 
