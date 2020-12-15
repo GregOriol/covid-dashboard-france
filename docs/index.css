@@ -92,21 +92,21 @@ input[type="checkbox"] {
 .chart svg .y-line-orange text {
 	fill: #ffa500;
 }
-.chart svg .x-line-c1-start line {
-	stroke: #caa;
-}
-.chart svg .x-line-c1-start text {
-	fill: #caa;
-}
-.chart svg .x-line-c1-end line {
-	stroke: #aca;
-}
-.chart svg .x-line-c1-end text {
-	fill: #aca;
-}
+.chart svg .x-line-c1-start line,
+.chart svg .x-line-cf-start line,
 .chart svg .x-line-c2-start line {
 	stroke: #caa;
 }
+.chart svg .x-line-c1-start text,
+.chart svg .x-line-cf-start text,
 .chart svg .x-line-c2-start text {
 	fill: #caa;
+}
+.chart svg .x-line-c1-end line,
+.chart svg .x-line-c2-end line {
+	stroke: #aca;
+}
+.chart svg .x-line-c1-end text,
+.chart svg .x-line-c2-end text {
+	fill: #aca;
 }
