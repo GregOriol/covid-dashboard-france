@@ -275,17 +275,17 @@ function bindChart(id, name, datasets, type = 'bar', infos = null) {
 	};
 
 	if (id === 'consolTx') {
-		options['grid']['y']['lines'].push({value: 10, text: 'orange', class: 'y-line-orange'});
-		options['grid']['y']['lines'].push({value: 50, text: 'rouge', class: 'y-line-red'});
+		options['grid']['y']['lines'].push({value: 10, text: 'orange', class: 'y-line-orange', position: 'start'});
+		options['grid']['y']['lines'].push({value: 50, text: 'rouge', class: 'y-line-red', position: 'start'});
 	} else if (id === 'consolTxPos') {
-		options['grid']['y']['lines'].push({value: 5, text: 'orange', class: 'y-line-orange'});
-		options['grid']['y']['lines'].push({value: 10, text: 'rouge', class: 'y-line-red'});
+		options['grid']['y']['lines'].push({value: 5, text: 'orange', class: 'y-line-orange', position: 'start'});
+		options['grid']['y']['lines'].push({value: 10, text: 'rouge', class: 'y-line-red', position: 'start'});
 	} else if (id === 'r') {
-		options['grid']['y']['lines'].push({value: 1, text: 'orange', class: 'y-line-orange'});
-		options['grid']['y']['lines'].push({value: 1.5, text: 'rouge', class: 'y-line-red'});
+		options['grid']['y']['lines'].push({value: 1, text: 'orange', class: 'y-line-orange', position: 'start'});
+		options['grid']['y']['lines'].push({value: 1.5, text: 'rouge', class: 'y-line-red', position: 'start'});
 	} else if (id === 'occup') {
-		options['grid']['y']['lines'].push({value: 40, text: 'orange', class: 'y-line-orange'});
-		options['grid']['y']['lines'].push({value: 60, text: 'rouge', class: 'y-line-red'});
+		options['grid']['y']['lines'].push({value: 40, text: 'orange', class: 'y-line-orange', position: 'start'});
+		options['grid']['y']['lines'].push({value: 60, text: 'rouge', class: 'y-line-red', position: 'start'});
 	}
 
 	let start = null;
