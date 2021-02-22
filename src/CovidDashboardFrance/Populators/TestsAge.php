@@ -57,16 +57,16 @@ class TestsAge
                 if ($type === 'department') {
                     $loc  = $row[0];
                     $jour = $row[1];
-                    $pop  = $row[2];
-                    $p    = $row[3];
-                    $age  = $row[4];
+                    $p    = $row[2];
+                    $age  = $row[3];
+                    $pop  = $row[4];
                 }
                 if ($type === 'region' || $type === 'country') {
                     $loc  = $row[0];
                     $jour = $row[1];
                     $p    = $row[4];
-                    $pop  = $row[7];
-                    $age  = $row[8];
+                    $age  = $row[7];
+                    $pop  = $row[8];
                 }
 
                 if ($age === null || $age === '0') { continue; } // only taking into account data for ages and not 0 which is the sum of them
