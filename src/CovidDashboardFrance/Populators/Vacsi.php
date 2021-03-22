@@ -56,10 +56,17 @@ class Vacsi
                 $jour = $row[1];
                 $dose1 = $row[2];
                 $dose2 = $row[3];
-                $dose1Tot = $row[4];
-                $dose1Couv = $row[5];
-                $dose2Tot = $row[6];
-                $dose2Couv = $row[7];
+                if ($type === 'country') {
+                    $dose1Tot  = $row[4];
+                    $dose1Couv = $row[5];
+                    $dose2Tot  = $row[6];
+                    $dose2Couv = $row[7];
+                } elseif ($type === 'region' || $type === 'department') {
+                    $dose1Tot  = $row[4];
+                    $dose1Couv = $row[6];
+                    $dose2Tot  = $row[5];
+                    $dose2Couv = $row[7];
+                }
 
                 $country = 'FRA';
                 $region = null;
