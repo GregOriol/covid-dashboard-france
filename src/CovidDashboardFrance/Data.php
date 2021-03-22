@@ -127,7 +127,6 @@ class Data
     /** @var float|null Taux positivité tests sur une semaine */
     public $txPos7 = null;
 
-
     /** @var int|null */
     public $ageP09 = null;
     /** @var int|null */
@@ -170,6 +169,90 @@ class Data
     public $dose2Tot = null;
     /** @var float|null */
     public $dose2Couv = null;
+
+    /** @var int|null */
+    public $ageDose109 = null;
+    /** @var int|null */
+    public $ageDose119 = null;
+    /** @var int|null */
+    public $ageDose129 = null;
+    /** @var int|null */
+    public $ageDose139 = null;
+    /** @var int|null */
+    public $ageDose149 = null;
+    /** @var int|null */
+    public $ageDose159 = null;
+    /** @var int|null */
+    public $ageDose169 = null;
+    /** @var int|null */
+    public $ageDose179 = null;
+    /** @var int|null */
+    public $ageDose189 = null;
+    /** @var int|null */
+    public $ageDose190 = null;
+
+    /** @var int|null */
+    public $ageDose209 = null;
+    /** @var int|null */
+    public $ageDose219 = null;
+    /** @var int|null */
+    public $ageDose229 = null;
+    /** @var int|null */
+    public $ageDose239 = null;
+    /** @var int|null */
+    public $ageDose249 = null;
+    /** @var int|null */
+    public $ageDose259 = null;
+    /** @var int|null */
+    public $ageDose269 = null;
+    /** @var int|null */
+    public $ageDose279 = null;
+    /** @var int|null */
+    public $ageDose289 = null;
+    /** @var int|null */
+    public $ageDose290 = null;
+
+    /** @var int|null */
+    public $ageDose1Tot09 = null;
+    /** @var int|null */
+    public $ageDose1Tot19 = null;
+    /** @var int|null */
+    public $ageDose1Tot29 = null;
+    /** @var int|null */
+    public $ageDose1Tot39 = null;
+    /** @var int|null */
+    public $ageDose1Tot49 = null;
+    /** @var int|null */
+    public $ageDose1Tot59 = null;
+    /** @var int|null */
+    public $ageDose1Tot69 = null;
+    /** @var int|null */
+    public $ageDose1Tot79 = null;
+    /** @var int|null */
+    public $ageDose1Tot89 = null;
+    /** @var int|null */
+    public $ageDose1Tot90 = null;
+
+    /** @var int|null */
+    public $ageDose2Tot09 = null;
+    /** @var int|null */
+    public $ageDose2Tot19 = null;
+    /** @var int|null */
+    public $ageDose2Tot29 = null;
+    /** @var int|null */
+    public $ageDose2Tot39 = null;
+    /** @var int|null */
+    public $ageDose2Tot49 = null;
+    /** @var int|null */
+    public $ageDose2Tot59 = null;
+    /** @var int|null */
+    public $ageDose2Tot69 = null;
+    /** @var int|null */
+    public $ageDose2Tot79 = null;
+    /** @var int|null */
+    public $ageDose2Tot89 = null;
+    /** @var int|null */
+    public $ageDose2Tot90 = null;
 
     /**
      * HospTotal constructor.

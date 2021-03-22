@@ -49,6 +49,16 @@
 		<div class="chart" id="chart-tx7"></div>
 	</div>
 
+	<h2>Vaccinations</h2>
+	<div class="charts clearfix">
+		<div class="chart" id="chart-dose1"></div>
+		<div class="chart" id="chart-dose2"></div>
+		<div class="chart" id="chart-dose1Tot"></div>
+		<div class="chart" id="chart-dose2Tot"></div>
+		<div class="chart" id="chart-dose1Couv"></div>
+		<div class="chart" id="chart-dose2Couv"></div>
+	</div>
+
 	<h2>Par classe d'âge</h2>
 	<div class="charts clearfix">
 		<div class="selector">
@@ -68,6 +78,11 @@
 		<div class="chart" id="chart-age-rad"></div>
 		<div class="chart" id="chart-age-dc"></div>
 		<div class="chart" id="chart-age-p"></div>
+		<div class="chart placeholder"></div>
+		<div class="chart" id="chart-age-dose1"></div>
+		<div class="chart" id="chart-age-dose2"></div>
+		<div class="chart" id="chart-age-dose1Tot"></div>
+		<div class="chart" id="chart-age-dose2Tot"></div>
 	</div>
 
 	<h2>Indicateurs de suivi de l’épidémie</h2>
@@ -76,16 +91,6 @@
 		<div class="chart" id="chart-consolTxPos"></div>
 		<div class="chart" id="chart-r"></div>
 		<div class="chart" id="chart-occup"></div>
-	</div>
-
-	<h2>Vaccinations</h2>
-	<div class="charts clearfix">
-		<div class="chart" id="chart-dose1"></div>
-		<div class="chart" id="chart-dose2"></div>
-		<div class="chart" id="chart-dose1Tot"></div>
-		<div class="chart" id="chart-dose2Tot"></div>
-		<div class="chart" id="chart-dose1Couv"></div>
-		<div class="chart" id="chart-dose2Couv"></div>
 	</div>
 
 	<h2>Divers</h2>
