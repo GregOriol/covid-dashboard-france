@@ -158,6 +158,19 @@ class Data
     /** @var float|null Tension hospitalière sur la capacité en réanimation */
     public $occup = null;
 
+    /** @var int|null */
+    public $dose1 = null;
+    /** @var int|null */
+    public $dose2 = null;
+    /** @var int|null */
+    public $dose1Tot = null;
+    /** @var float|null */
+    public $dose1Couv = null;
+    /** @var int|null */
+    public $dose2Tot = null;
+    /** @var float|null */
+    public $dose2Couv = null;
+
     /**
      * HospTotal constructor.
      *

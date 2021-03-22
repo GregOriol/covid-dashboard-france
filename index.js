@@ -63,6 +63,13 @@ domReady(() => {
 		bindChart('r', 'Facteur de reproduction du virus (R0)', getSelectedDatasets('r', '#923a00'), 'line', 'Région/pays uniquement');
 		bindChart('occup', 'Tension hospitalière sur la capacité en réanimation', getSelectedDatasets('occup', '#169200'), 'line', 'Taux d\'occupation en % - région/pays uniquement');
 
+		bindChart('dose1', '1ère dose', getSelectedDatasets('dose1', '#2464b0'), 'bar');
+		bindChart('dose2', '2ème dose', getSelectedDatasets('dose2', '#29a03b'), 'bar');
+		bindChart('dose1Tot', '1ère dose cumulée', getSelectedDatasets('dose1Tot', '#2464b0'), 'bar');
+		bindChart('dose2Tot', '2ème dose cumulée', getSelectedDatasets('dose2Tot', '#29a03b'), 'bar');
+		bindChart('dose1Couv', 'Taux de couverture 1ère dose', getSelectedDatasets('dose1Couv', '#2464b0'), 'line', 'Taux en %');
+		bindChart('dose2Couv', 'Taux de couverture 2ème dose', getSelectedDatasets('dose2Couv', '#29a03b'), 'line', 'Taux en %');
+
 		bindChart('pop', 'Population', getSelectedDatasets('pop', '#3368d1'), 'line');
 	};
 

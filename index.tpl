@@ -78,6 +78,16 @@
 		<div class="chart" id="chart-occup"></div>
 	</div>
 
+	<h2>Vaccinations</h2>
+	<div class="charts clearfix">
+		<div class="chart" id="chart-dose1"></div>
+		<div class="chart" id="chart-dose2"></div>
+		<div class="chart" id="chart-dose1Tot"></div>
+		<div class="chart" id="chart-dose2Tot"></div>
+		<div class="chart" id="chart-dose1Couv"></div>
+		<div class="chart" id="chart-dose2Couv"></div>
+	</div>
+
 	<h2>Divers</h2>
 	<div class="charts clearfix">
 		<div class="chart" id="chart-pop"></div>
@@ -94,6 +104,8 @@
 			<dd><a href="https://www.data.gouv.fr/fr/datasets/capacite-analytique-de-tests-virologiques-dans-le-cadre-de-lepidemie-covid-19" target="_blank" rel="noopener noreferrer">https://www.data.gouv.fr/fr/datasets/capacite-analytique-de-tests-virologiques-dans-le-cadre-de-lepidemie-covid-19</a></dd>
 			<dt>* Indicateurs de suivi de l’épidémie de COVID-19 - Ministère des Solidarités et de la Santé</dt>
 			<dd><a href="https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19" target="_blank" rel="noopener noreferrer">https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19</a></dd>
+			<dt>* Données relatives aux personnes vaccinées contre la Covid-19 (VAC-SI) - Santé publique France</dt>
+			<dd><a href="https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19-1" target="_blank" rel="noopener noreferrer">https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19-1</a></dd>
 		</dl>
 		Code source de cette page: <a href="http://github.com/GregOriol/covid-dashboard-france" target="_blank" rel="noopener noreferrer">http://github.com/GregOriol/covid-dashboard-france</a><br>
 	</div>

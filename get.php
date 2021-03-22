@@ -18,6 +18,7 @@ require_once 'src/CovidDashboardFrance/Populators/Tests.php';
 require_once 'src/CovidDashboardFrance/Populators/TestsAge.php';
 require_once 'src/CovidDashboardFrance/Populators/Capa.php';
 require_once 'src/CovidDashboardFrance/Populators/Indicateurs.php';
+require_once 'src/CovidDashboardFrance/Populators/Vacsi.php';
 
 ini_set('memory_limit', '-1');
 
@@ -77,6 +78,10 @@ $france = new \CovidDashboardFrance\France($depatmentsDataUrl, $regionsDataUrl);
 // https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e indicateurs-covid19-dep.csv
 // https://www.data.gouv.fr/fr/datasets/r/381a9472-ce83-407d-9a64-1b8c23af83df indicateurs-covid19-fra.csv
 //
+// - https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19-1/
+// https://www.data.gouv.fr/fr/datasets/r/4f39ec91-80d7-4602-befb-4b522804c0af vacsi-dep-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/735b0df8-51b4-4dd2-8a2d-8e46d77d60d8 vacsi-reg-*.csv
+// https://www.data.gouv.fr/fr/datasets/r/efe23314-67c4-45d3-89a2-3faef82fae90 vacsi-fra-*.csv
 
 $hospTotalDataUrl     = 'https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7';
 $hospIncidenceDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c';
@@ -92,6 +97,9 @@ $capaRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/21ff3134-c37c-41ef-bb3
 $capaFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/44b46964-8583-4f18-b93f-80fefcbf3b74';
 $indicateursDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e';
 $indicateursFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/381a9472-ce83-407d-9a64-1b8c23af83df';
+$vacsiDepDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/4f39ec91-80d7-4602-befb-4b522804c0af';
+$vacsiRegDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/735b0df8-51b4-4dd2-8a2d-8e46d77d60d8';
+$vacsiFraDataUrl = 'https://www.data.gouv.fr/fr/datasets/r/efe23314-67c4-45d3-89a2-3faef82fae90';
 
 $cachedHospTotalDataPath = './cache/hosp-total.csv';
 if (!file_exists($cachedHospTotalDataPath)) {
@@ -191,6 +199,27 @@ if (!file_exists($cachedIndicateursFraDataPath)) {
 }
 $indicateursFraDataUrl = $cachedIndicateursFraDataPath;
 
+$cachedVacsiDepDataPath = './cache/vacsi-dep.csv';
+if (!file_exists($cachedVacsiDepDataPath)) {
+    $contents = file_get_contents($vacsiDepDataUrl);
+    file_put_contents($cachedVacsiDepDataPath, $contents);
+}
+$vacsiDepDataUrl = $cachedVacsiDepDataPath;
+
+$cachedVacsiRegDataPath = './cache/vacsi-reg.csv';
+if (!file_exists($cachedVacsiRegDataPath)) {
+    $contents = file_get_contents($vacsiRegDataUrl);
+    file_put_contents($cachedVacsiRegDataPath, $contents);
+}
+$vacsiRegDataUrl = $cachedVacsiRegDataPath;
+
+$cachedVacsiFraDataPath = './cache/vacsi-fra.csv';
+if (!file_exists($cachedVacsiFraDataPath)) {
+    $contents = file_get_contents($vacsiFraDataUrl);
+    file_put_contents($cachedVacsiFraDataPath, $contents);
+}
+$vacsiFraDataUrl = $cachedVacsiFraDataPath;
+
 unset($contents);
 
 $covid = new \CovidDashboardFrance\Covid();
@@ -223,6 +252,10 @@ $populator = new \CovidDashboardFrance\Populators\Indicateurs($france, $covid);
 $populator->populateData($indicateursDepDataUrl, $indicateursFraDataUrl);
 //$populator->generateConsolidations();
 
+$populator = new \CovidDashboardFrance\Populators\Vacsi($france, $covid);
+$populator->populateData($vacsiDepDataUrl, $vacsiRegDataUrl, $vacsiFraDataUrl);
+//$populator->generateConsolidations();
+
 //var_dump($covid->data);
 //var_dump($covid->refs);
 
@@ -231,7 +264,8 @@ $indicators = array(
     'incidenceHosp', 'incidenceRea', 'incidenceRad', 'incidenceDc',
     'pop',
     't', 'p', 'tx', 'tx7', 'txPos', 'txPos7',
-    'consolTx', 'consolTxPos', 'r', 'occup'
+    'consolTx', 'consolTxPos', 'r', 'occup',
+    'dose1', 'dose2', 'dose1Tot', 'dose2Tot', 'dose1Couv', 'dose2Couv',
 );
 Helpers::agesIterator(function ($age) use (&$indicators) {
     $indicators[] = 'ageHosp'.$age;
