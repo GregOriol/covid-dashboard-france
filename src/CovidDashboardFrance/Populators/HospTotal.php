@@ -50,7 +50,7 @@ class HospTotal
             if ($i === 1) { continue; } // skipping header
 
             $row = str_getcsv($row, ';');
-            if (count($row) !== 7) { continue; }
+            if (count($row) !== 10) { continue; }
             if ($row[0] === '') { continue; } // cleaning invalid data
 
             $dep = $row[0];
@@ -58,8 +58,8 @@ class HospTotal
             $jour = $row[2];
             $hosp = $row[3];
             $rea = $row[4];
-            $rad = $row[5];
-            $dc = $row[6];
+            $rad = $row[8];
+            $dc = $row[9];
 
             if ($sexe !== '0') { continue; } // only taking into account data for all sexes
 
