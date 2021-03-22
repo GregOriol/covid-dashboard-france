@@ -42,9 +42,16 @@ h3 {
 	box-sizing: border-box;
 	position: relative;
 }
+.chart.placeholder {
+	height: 337px;
+	background-color: transparent;
+}
 @media (max-width: 750px) {
 	.chart {
 		width: calc(100% - 10px - 10px);
+	}
+	.chart.placeholder {
+		display: none;
 	}
 }
 .chart-container {
