@@ -50,7 +50,7 @@ class VacsiAge
                 if ($i === 1) { continue; } // skipping header
 
                 $row = str_getcsv($row, ';');
-                if (count($row) !== 7) { continue; }
+                if (count($row) !== 9) { continue; }
                 if ($row[0] === '') { continue; } // cleaning invalid data
 
                 $loc      = $row[0];

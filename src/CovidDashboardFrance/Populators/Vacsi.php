@@ -58,8 +58,8 @@ class Vacsi
                 $dose2 = $row[3];
                 if ($type === 'country') {
                     $dose1Tot  = $row[4];
-                    $dose1Couv = $row[5];
-                    $dose2Tot  = $row[6];
+                    $dose1Couv = $row[6];
+                    $dose2Tot  = $row[5];
                     $dose2Couv = $row[7];
                 } elseif ($type === 'region' || $type === 'department') {
                     $dose1Tot  = $row[4];
