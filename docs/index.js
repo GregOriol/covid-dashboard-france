@@ -345,6 +345,7 @@ function bindChart(id, name, datasets, type = 'bar', infos = null) {
 					{value: '2020-10-30', text: 'c2', class: 'x-line-start', position: 'end'},
 					{value: '2020-12-14', text: 'fin c2', class: 'x-line-end', position: 'end'},
 					{value: '2021-01-16', text: 'cf18h', class: 'x-line-start', position: 'end'},
+					{value: '2021-06-20', text: 'fin cf', class: 'x-line-end', position: 'end'},
 				]
 			},
 			y: {
@@ -365,6 +366,10 @@ function bindChart(id, name, datasets, type = 'bar', infos = null) {
 	} else if (id === 'occup') {
 		options['grid']['y']['lines'].push({value: 40, text: 'orange', class: 'y-line-orange', position: 'start'});
 		options['grid']['y']['lines'].push({value: 60, text: 'rouge', class: 'y-line-red', position: 'start'});
+	} else if (id === 'dose1Couv' || id === 'dose2Couv' || id === 'age-dose1Couv' || id === 'age-dose2Couv') {
+		options['grid']['y']['lines'].push({value: 90, text: '90%', class: 'y-line-green', position: 'start'});
+		options['grid']['y']['lines'].push({value: 70, text: '70%', class: 'y-line-blue', position: 'start'});
+		options['grid']['y']['lines'].push({value: 50, text: '50%', class: 'y-line-purple', position: 'start'});
 	}
 
 	let start = null;

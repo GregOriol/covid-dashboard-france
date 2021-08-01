@@ -99,6 +99,24 @@ input[type="checkbox"] {
 .chart svg .y-line-orange text {
 	fill: #ffa500;
 }
+.chart svg .y-line-green line {
+	stroke: #6ca730;
+}
+.chart svg .y-line-green text {
+	fill: #6ca730;
+}
+.chart svg .y-line-blue line {
+	stroke: #346db6;
+}
+.chart svg .y-line-blue text {
+	fill: #346db6;
+}
+.chart svg .y-line-purple line {
+	stroke: #7134b6;
+}
+.chart svg .y-line-purple text {
+	fill: #7134b6;
+}
 .chart svg .x-line-c1-start line,
 .chart svg .x-line-start line {
 	stroke: #caa;
