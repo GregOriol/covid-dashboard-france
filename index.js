@@ -60,8 +60,8 @@ domReady(() => {
 		bindChart('dose2', '2ème dose', getSelectedDatasets('dose2', '#29a03b'), 'bar');
 		bindChart('dose1Tot', '1ère dose cumulée', getSelectedDatasets('dose1Tot', '#2464b0'), 'bar');
 		bindChart('dose2Tot', '2ème dose cumulée', getSelectedDatasets('dose2Tot', '#29a03b'), 'bar');
-		bindChart('dose1Couv', 'Taux de couverture 1ère dose', getSelectedDatasets('dose1Couv', '#2464b0'), 'line', 'Taux en %');
-		bindChart('dose2Couv', 'Taux de couverture 2ème dose', getSelectedDatasets('dose2Couv', '#29a03b'), 'line', 'Taux en %');
+		bindChart('dose1Couv', '1ère dose couverture', getSelectedDatasets('dose1Couv', '#2464b0'), 'line', 'Taux en %');
+		bindChart('dose2Couv', '2ème dose couverture', getSelectedDatasets('dose2Couv', '#29a03b'), 'line', 'Taux en %');
 
 		changeAgeFunction();
 
@@ -83,6 +83,8 @@ domReady(() => {
 		let ageDose2Datasets = [];
 		let ageDose1TotDatasets = [];
 		let ageDose2TotDatasets = [];
+		let ageDose1CouvDatasets = [];
+		let ageDose2CouvDatasets = [];
 		if (document.getElementById('age-09').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp09', '#66C2A3', '0-9'));
 			ageReaDatasets.push.apply(ageReaDatasets, getSelectedDatasets('ageRea09', '#66C2A3', '0-9'));
@@ -93,6 +95,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose209', '#66C2A3', '0-9'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot09', '#66C2A3', '0-9'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot09', '#66C2A3', '0-9'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv09', '#66C2A3', '0-9'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv09', '#66C2A3', '0-9'));
 		}
 		if (document.getElementById('age-19').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp19', '#5DC2CD', '10-19'));
@@ -100,10 +104,12 @@ domReady(() => {
 			ageRadDatasets.push.apply(ageRadDatasets, getSelectedDatasets('ageRad19', '#5DC2CD', '10-19'));
 			ageDcDatasets.push.apply(ageDcDatasets, getSelectedDatasets('ageDc19', '#5DC2CD', '10-19'));
 			agePDatasets.push.apply(agePDatasets, getSelectedDatasets('ageP19', '#5DC2CD', '10-19'));
-			ageDose1Datasets.push.apply(ageDose1Datasets, getSelectedDatasets('ageDose119', '#66C2A3', '10-19'));
-			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose219', '#66C2A3', '10-19'));
-			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot19', '#66C2A3', '10-19'));
-			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot19', '#66C2A3', '10-19'));
+			ageDose1Datasets.push.apply(ageDose1Datasets, getSelectedDatasets('ageDose119', '#5DC2CD', '10-19'));
+			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose219', '#5DC2CD', '10-19'));
+			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot19', '#5DC2CD', '10-19'));
+			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot19', '#5DC2CD', '10-19'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv19', '#5DC2CD', '10-19'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv19', '#5DC2CD', '10-19'));
 		}
 		if (document.getElementById('age-29').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp29', '#ADBCC3', '20-29'));
@@ -115,6 +121,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose229', '#ADBCC3', '20-29'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot29', '#ADBCC3', '20-29'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot29', '#ADBCC3', '20-29'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv29', '#ADBCC3', '20-29'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv29', '#ADBCC3', '20-29'));
 		}
 		if (document.getElementById('age-39').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp39', '#698CAF', '30-39'));
@@ -126,6 +134,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose239', '#698CAF', '30-39'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot39', '#698CAF', '30-39'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot39', '#698CAF', '30-39'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv39', '#698CAF', '30-39'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv39', '#698CAF', '30-39'));
 		}
 		if (document.getElementById('age-49').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp49', '#BE9DE2', '40-49'));
@@ -137,6 +147,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose249', '#BE9DE2', '40-49'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot49', '#BE9DE2', '40-49'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot49', '#BE9DE2', '40-49'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv49', '#BE9DE2', '40-49'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv49', '#BE9DE2', '40-49'));
 		}
 		if (document.getElementById('age-59').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp59', '#828AF7', '50-59'));
@@ -148,6 +160,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose259', '#828AF7', '50-59'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot59', '#828AF7', '50-59'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot59', '#828AF7', '50-59'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv59', '#828AF7', '50-59'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv59', '#828AF7', '50-59'));
 		}
 		if (document.getElementById('age-69').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp69', '#D876C0', '60-69'));
@@ -159,6 +173,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose269', '#D876C0', '60-69'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot69', '#D876C0', '60-69'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot69', '#D876C0', '60-69'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv69', '#D876C0', '60-69'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv69', '#D876C0', '60-69'));
 		}
 		if (document.getElementById('age-79').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp79', '#F490AE', '70-79'));
@@ -170,6 +186,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose279', '#F490AE', '70-79'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot79', '#F490AE', '70-79'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot79', '#F490AE', '70-79'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv79', '#F490AE', '70-79'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv79', '#F490AE', '70-79'));
 		}
 		if (document.getElementById('age-89').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp89', '#F8A6A6', '80-89'));
@@ -181,6 +199,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose289', '#F8A6A6', '80-89'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot89', '#F8A6A6', '80-89'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot89', '#F8A6A6', '80-89'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv89', '#F8A6A6', '80-89'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv89', '#F8A6A6', '80-89'));
 		}
 		if (document.getElementById('age-90').checked) {
 			ageHospDatasets.push.apply(ageHospDatasets, getSelectedDatasets('ageHosp90', '#F5AA85', '90+'));
@@ -192,6 +212,8 @@ domReady(() => {
 			ageDose2Datasets.push.apply(ageDose2Datasets, getSelectedDatasets('ageDose290', '#F5AA85', '90+'));
 			ageDose1TotDatasets.push.apply(ageDose1TotDatasets, getSelectedDatasets('ageDose1Tot90', '#F5AA85', '90+'));
 			ageDose2TotDatasets.push.apply(ageDose2TotDatasets, getSelectedDatasets('ageDose2Tot90', '#F5AA85', '90+'));
+			ageDose1CouvDatasets.push.apply(ageDose1CouvDatasets, getSelectedDatasets('ageDose1Couv90', '#F5AA85', '90+'));
+			ageDose2CouvDatasets.push.apply(ageDose2CouvDatasets, getSelectedDatasets('ageDose2Couv90', '#F5AA85', '90+'));
 		}
 		bindChart('age-hosp', 'Hospitalisations', ageHospDatasets, 'line');
 		bindChart('age-rea', 'Réanimation ou soins intensifs', ageReaDatasets, 'line');
@@ -202,6 +224,8 @@ domReady(() => {
 		bindChart('age-dose2', '2ème dose', ageDose2Datasets, 'line');
 		bindChart('age-dose1Tot', '1ère dose cumulée', ageDose1TotDatasets, 'line');
 		bindChart('age-dose2Tot', '2ème dose cumulée', ageDose2TotDatasets, 'line');
+		bindChart('age-dose1Couv', '1ère dose couverture', ageDose1CouvDatasets, 'line', 'Taux en %');
+		bindChart('age-dose2Couv', '2ème dose couverture', ageDose2CouvDatasets, 'line', 'Taux en %');
 	};
 
 	addEventHandler(datasetElem1, 'change', changeFunction);

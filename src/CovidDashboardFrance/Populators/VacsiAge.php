@@ -141,6 +141,40 @@ class VacsiAge
 
     public function generateConsolidations()
     {
-        // nothing to do
+        $ages = ['09', '19', '29', '39', '49', '59', '69', '79', '89', '90'];
+
+        // Generating ageDoseXCouv data
+        Helpers::dateIterator(function ($date) use ($ages) {
+            $countryData = $this->covid->getDataForDate($date, 'FRA', null, null);
+
+            foreach ($ages as $age) {
+                if ($countryData->{'agePop'.$age} !== null) {
+                    $countryData->{'ageDose1Couv'.$age} = round($countryData->{'ageDose1Tot'.$age} / $countryData->{'agePop'.$age} * 100, 1);
+                    $countryData->{'ageDose2Couv'.$age} = round($countryData->{'ageDose2Tot'.$age} / $countryData->{'agePop'.$age} * 100, 1);
+                }
+            }
+
+            foreach ($this->france->getRegions() as $region) {
+                $regionData = $this->covid->getDataForDate($date, 'FRA', $region->number, null);
+
+                foreach ($ages as $age) {
+                    if ($regionData->{'agePop'.$age} !== null) {
+                        $regionData->{'ageDose1Couv'.$age} = round($regionData->{'ageDose1Tot'.$age} / $regionData->{'agePop'.$age} * 100, 1);
+                        $regionData->{'ageDose2Couv'.$age} = round($regionData->{'ageDose2Tot'.$age} / $regionData->{'agePop'.$age} * 100, 1);
+                    }
+                }
+
+                foreach ($this->france->getDepartmentsForRegion($region) as $department) {
+                    $departmentData = $this->covid->getDataForDate($date, 'FRA', $region->number, $department->number);
+
+                    foreach ($ages as $age) {
+                        if ($departmentData->{'agePop'.$age} !== null) {
+                            $departmentData->{'ageDose1Couv'.$age} = round($departmentData->{'ageDose1Tot'.$age} / $departmentData->{'agePop'.$age} * 100, 1);
+                            $departmentData->{'ageDose2Couv'.$age} = round($departmentData->{'ageDose2Tot'.$age} / $departmentData->{'agePop'.$age} * 100, 1);
+                        }
+                    }
+                }
+            }
+        });
     }
 }

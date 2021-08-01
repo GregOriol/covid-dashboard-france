@@ -91,6 +91,7 @@ class TestsAge
                 if (!$data) { continue; }
 
                 $data->{'ageP'.$age} = (int)$p;
+                $data->{'agePop'.$age} = (int)$pop;
             }
         }
     }

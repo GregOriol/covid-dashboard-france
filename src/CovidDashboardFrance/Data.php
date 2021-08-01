@@ -148,6 +148,27 @@ class Data
     /** @var int|null */
     public $ageP90 = null;
 
+    /** @var int|null */
+    public $agePop09 = null;
+    /** @var int|null */
+    public $agePop19 = null;
+    /** @var int|null */
+    public $agePop29 = null;
+    /** @var int|null */
+    public $agePop39 = null;
+    /** @var int|null */
+    public $agePop49 = null;
+    /** @var int|null */
+    public $agePop59 = null;
+    /** @var int|null */
+    public $agePop69 = null;
+    /** @var int|null */
+    public $agePop79 = null;
+    /** @var int|null */
+    public $agePop89 = null;
+    /** @var int|null */
+    public $agePop90 = null;
+
     /** @var float|null Taux incidence tests consolidé */
     public $consolTx = null;
     /** @var float|null Taux positivité tests consolidé */
@@ -253,6 +274,48 @@ class Data
     public $ageDose2Tot89 = null;
     /** @var int|null */
     public $ageDose2Tot90 = null;
+
+    /** @var float|null */
+    public $ageDose1Couv09 = null;
+    /** @var float|null */
+    public $ageDose1Couv19 = null;
+    /** @var float|null */
+    public $ageDose1Couv29 = null;
+    /** @var float|null */
+    public $ageDose1Couv39 = null;
+    /** @var float|null */
+    public $ageDose1Couv49 = null;
+    /** @var float|null */
+    public $ageDose1Couv59 = null;
+    /** @var float|null */
+    public $ageDose1Couv69 = null;
+    /** @var float|null */
+    public $ageDose1Couv79 = null;
+    /** @var float|null */
+    public $ageDose1Couv89 = null;
+    /** @var float|null */
+    public $ageDose1Couv90 = null;
+
+    /** @var float|null */
+    public $ageDose2Couv09 = null;
+    /** @var float|null */
+    public $ageDose2Couv19 = null;
+    /** @var float|null */
+    public $ageDose2Couv29 = null;
+    /** @var float|null */
+    public $ageDose2Couv39 = null;
+    /** @var float|null */
+    public $ageDose2Couv49 = null;
+    /** @var float|null */
+    public $ageDose2Couv59 = null;
+    /** @var float|null */
+    public $ageDose2Couv69 = null;
+    /** @var float|null */
+    public $ageDose2Couv79 = null;
+    /** @var float|null */
+    public $ageDose2Couv89 = null;
+    /** @var float|null */
+    public $ageDose2Couv90 = null;
 
     /**
      * HospTotal constructor.

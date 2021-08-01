@@ -83,6 +83,8 @@
 		<div class="chart" id="chart-age-dose2"></div>
 		<div class="chart" id="chart-age-dose1Tot"></div>
 		<div class="chart" id="chart-age-dose2Tot"></div>
+		<div class="chart" id="chart-age-dose1Couv"></div>
+		<div class="chart" id="chart-age-dose2Couv"></div>
 	</div>
 
 	<h2>Indicateurs de suivi de l’épidémie</h2>

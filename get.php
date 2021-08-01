@@ -306,10 +306,13 @@ Helpers::agesIterator(function ($age) use (&$indicators) {
     $indicators[] = 'ageRad'.$age;
     $indicators[] = 'ageDc'.$age;
     $indicators[] = 'ageP'.$age;
+    $indicators[] = 'agePop'.$age;
     $indicators[] = 'ageDose1'.$age;
     $indicators[] = 'ageDose2'.$age;
     $indicators[] = 'ageDose1Tot'.$age;
     $indicators[] = 'ageDose2Tot'.$age;
+    $indicators[] = 'ageDose1Couv'.$age;
+    $indicators[] = 'ageDose2Couv'.$age;
 });
 
 $output = array(
