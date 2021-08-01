@@ -64,7 +64,7 @@
 		<div class="selector">
 			<div class="checkbox"><input type="checkbox" name="age-09" id="age-09"><label for="age-09">0-9 ans</label></div>
 			<div class="checkbox"><input type="checkbox" name="age-19" id="age-19"><label for="age-19">10-19 ans</label></div>
-			<div class="checkbox"><input type="checkbox" name="age-29" id="age-29"><label for="age-29">20-29 ans</label></div>
+			<div class="checkbox"><input type="checkbox" name="age-29" id="age-29" checked="checked"><label for="age-29">20-29 ans</label></div>
 			<div class="checkbox"><input type="checkbox" name="age-39" id="age-39"><label for="age-39">30-39 ans</label></div>
 			<div class="checkbox"><input type="checkbox" name="age-49" id="age-49" checked="checked"><label for="age-49">40-49 ans</label></div>
 			<div class="checkbox"><input type="checkbox" name="age-59" id="age-59"><label for="age-59">50-59 ans</label></div>
