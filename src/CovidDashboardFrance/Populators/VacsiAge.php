@@ -108,6 +108,11 @@ class VacsiAge
                     Helpers::incrBy($data->{'ageDose2'.'29'}, (int)$dose2);
                     Helpers::incrBy($data->{'ageDose1Tot'.'29'}, (int)$dose1Tot);
                     Helpers::incrBy($data->{'ageDose2Tot'.'29'}, (int)$dose2Tot);
+                } else if ($age === '64' || $age === '69') {
+                    Helpers::incrBy($data->{'ageDose1'.'69'}, (int)$dose1);
+                    Helpers::incrBy($data->{'ageDose2'.'69'}, (int)$dose2);
+                    Helpers::incrBy($data->{'ageDose1Tot'.'69'}, (int)$dose1Tot);
+                    Helpers::incrBy($data->{'ageDose2Tot'.'69'}, (int)$dose2Tot);
                 } else if ($age === '74' || $age === '79') {
                     Helpers::incrBy($data->{'ageDose1'.'79'}, (int)$dose1);
                     Helpers::incrBy($data->{'ageDose2'.'79'}, (int)$dose2);
