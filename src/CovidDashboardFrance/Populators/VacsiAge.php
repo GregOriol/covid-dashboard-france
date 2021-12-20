@@ -50,16 +50,21 @@ class VacsiAge
                 if ($i === 1) { continue; } // skipping header
 
                 $row = str_getcsv($row, ';');
-                if (count($row) !== 9) { continue; }
+                if (count($row) !== 12) { continue; }
                 if ($row[0] === '') { continue; } // cleaning invalid data
 
                 $loc      = $row[0];
                 $age      = $row[1];
                 $jour     = $row[2];
-                $dose1    = $row[3];
-                $dose2    = $row[4];
-                $dose1Tot = $row[5];
-                $dose2Tot = $row[6];
+                $debut    = $row[3];
+                $complet  = $row[4];
+                $rappel   = $row[5];
+                $debutTot = $row[6];
+                $completTot = $row[7];
+                $rappelTot = $row[8];
+                $debutCouv = $row[9];
+                $completCouv = $row[10];
+                $rappelCouv = $row[11];
 
                 if ($age === null || $age === '0') { continue; } // only taking into account data for ages and not 0 which is the sum of them
 
@@ -88,52 +93,70 @@ class VacsiAge
 
                 // Trying to match age ranges from other datasets
                 if ($age === '17') {
-                    Helpers::incrBy($data->{'ageDose1'.'19'}, $dose1);
-                    Helpers::incrBy($data->{'ageDose2'.'19'}, $dose2);
-                    Helpers::incrBy($data->{'ageDose1Tot'.'19'}, $dose1Tot);
-                    Helpers::incrBy($data->{'ageDose2Tot'.'19'}, $dose2Tot);
+                    Helpers::incrBy($data->{'ageDebut'.'19'}, $debut);
+                    Helpers::incrBy($data->{'ageComplet'.'19'}, $complet);
+                    Helpers::incrBy($data->{'ageRappel'.'19'}, $rappel);
+                    Helpers::incrBy($data->{'ageDebutTot'.'19'}, $debutTot);
+                    Helpers::incrBy($data->{'ageCompletTot'.'19'}, $completTot);
+                    Helpers::incrBy($data->{'ageRappelTot'.'19'}, $rappelTot);
                 } else if ($age === '24') {
                     // Within the 18-24 age range, about 30% are 18-19 and 70% are 20-24
-                    Helpers::incrBy($data->{'ageDose1'.'19'}, round((int)$dose1 * 0.30));
-                    Helpers::incrBy($data->{'ageDose2'.'19'}, round((int)$dose2 * 0.30));
-                    Helpers::incrBy($data->{'ageDose1Tot'.'19'}, round((int)$dose1Tot * 0.30));
-                    Helpers::incrBy($data->{'ageDose2Tot'.'19'}, round((int)$dose2Tot * 0.30));
+                    Helpers::incrBy($data->{'ageDebut'.'19'}, round((int)$debut * 0.30));
+                    Helpers::incrBy($data->{'ageComplet'.'19'}, round((int)$complet * 0.30));
+                    Helpers::incrBy($data->{'ageRappel'.'19'}, round((int)$rappel * 0.30));
+                    Helpers::incrBy($data->{'ageDebutTot'.'19'}, round((int)$debutTot * 0.30));
+                    Helpers::incrBy($data->{'ageCompletTot'.'19'}, round((int)$completTot * 0.30));
+                    Helpers::incrBy($data->{'ageRappelTot'.'19'}, round((int)$rappelTot * 0.30));
 
-                    Helpers::incrBy($data->{'ageDose1'.'29'}, round((int)$dose1 * 0.70));
-                    Helpers::incrBy($data->{'ageDose2'.'29'}, round((int)$dose2 * 0.70));
-                    Helpers::incrBy($data->{'ageDose1Tot'.'29'}, round((int)$dose1Tot * 0.70));
-                    Helpers::incrBy($data->{'ageDose2Tot'.'29'}, round((int)$dose2Tot * 0.70));
+                    Helpers::incrBy($data->{'ageDebut'.'29'}, round((int)$debut * 0.70));
+                    Helpers::incrBy($data->{'ageComplet'.'29'}, round((int)$complet * 0.70));
+                    Helpers::incrBy($data->{'ageRappel'.'29'}, round((int)$rappel * 0.70));
+                    Helpers::incrBy($data->{'ageDebutTot'.'29'}, round((int)$debutTot * 0.70));
+                    Helpers::incrBy($data->{'ageCompletTot'.'29'}, round((int)$completTot * 0.70));
+                    Helpers::incrBy($data->{'ageRappelTot'.'29'}, round((int)$rappelTot * 0.70));
                 } else if ($age === '29') {
-                    Helpers::incrBy($data->{'ageDose1'.'29'}, (int)$dose1);
-                    Helpers::incrBy($data->{'ageDose2'.'29'}, (int)$dose2);
-                    Helpers::incrBy($data->{'ageDose1Tot'.'29'}, (int)$dose1Tot);
-                    Helpers::incrBy($data->{'ageDose2Tot'.'29'}, (int)$dose2Tot);
+                    Helpers::incrBy($data->{'ageDebut'.'29'}, (int)$debut);
+                    Helpers::incrBy($data->{'ageComplet'.'29'}, (int)$complet);
+                    Helpers::incrBy($data->{'ageRappel'.'29'}, (int)$rappel);
+                    Helpers::incrBy($data->{'ageDebutTot'.'29'}, (int)$debutTot);
+                    Helpers::incrBy($data->{'ageCompletTot'.'29'}, (int)$completTot);
+                    Helpers::incrBy($data->{'ageRappelTot'.'29'}, (int)$rappelTot);
                 } else if ($age === '64' || $age === '69') {
-                    Helpers::incrBy($data->{'ageDose1'.'69'}, (int)$dose1);
-                    Helpers::incrBy($data->{'ageDose2'.'69'}, (int)$dose2);
-                    Helpers::incrBy($data->{'ageDose1Tot'.'69'}, (int)$dose1Tot);
-                    Helpers::incrBy($data->{'ageDose2Tot'.'69'}, (int)$dose2Tot);
+                    Helpers::incrBy($data->{'ageDebut'.'69'}, (int)$debut);
+                    Helpers::incrBy($data->{'ageComplet'.'69'}, (int)$complet);
+                    Helpers::incrBy($data->{'ageRappel'.'69'}, (int)$rappel);
+                    Helpers::incrBy($data->{'ageDebutTot'.'69'}, (int)$debutTot);
+                    Helpers::incrBy($data->{'ageCompletTot'.'69'}, (int)$completTot);
+                    Helpers::incrBy($data->{'ageRappelTot'.'69'}, (int)$rappelTot);
                 } else if ($age === '74' || $age === '79') {
-                    Helpers::incrBy($data->{'ageDose1'.'79'}, (int)$dose1);
-                    Helpers::incrBy($data->{'ageDose2'.'79'}, (int)$dose2);
-                    Helpers::incrBy($data->{'ageDose1Tot'.'79'}, (int)$dose1Tot);
-                    Helpers::incrBy($data->{'ageDose2Tot'.'79'}, (int)$dose2Tot);
+                    Helpers::incrBy($data->{'ageDebut'.'79'}, (int)$debut);
+                    Helpers::incrBy($data->{'ageComplet'.'79'}, (int)$complet);
+                    Helpers::incrBy($data->{'ageRappel'.'79'}, (int)$rappel);
+                    Helpers::incrBy($data->{'ageDebutTot'.'79'}, (int)$debutTot);
+                    Helpers::incrBy($data->{'ageCompletTot'.'79'}, (int)$completTot);
+                    Helpers::incrBy($data->{'ageRappelTot'.'79'}, (int)$rappelTot);
                 } else if ($age === '80') {
                     // Within the 80+ age range, about 78% are 80-89 and 22% are 90+
-                    $data->{'ageDose1'.'89'} = round((int)$dose1 * 0.78);
-                    $data->{'ageDose2'.'89'} = round((int)$dose2 * 0.78);
-                    $data->{'ageDose1Tot'.'89'} = round((int)$dose1Tot * 0.78);
-                    $data->{'ageDose2Tot'.'89'} = round((int)$dose2Tot * 0.78);
+                    $data->{'ageDebut'.'89'} = round((int)$debut * 0.78);
+                    $data->{'ageComplet'.'89'} = round((int)$complet * 0.78);
+                    $data->{'ageRappel'.'89'} = round((int)$rappel * 0.78);
+                    $data->{'ageDebutTot'.'89'} = round((int)$debutTot * 0.78);
+                    $data->{'ageCompletTot'.'89'} = round((int)$completTot * 0.78);
+                    $data->{'ageRappelTot'.'89'} = round((int)$rappelTot * 0.78);
 
-                    $data->{'ageDose1'.'90'} = round((int)$dose1 * 0.22);
-                    $data->{'ageDose2'.'90'} = round((int)$dose2 * 0.22);
-                    $data->{'ageDose1Tot'.'90'} = round((int)$dose1Tot * 0.22);
-                    $data->{'ageDose2Tot'.'90'} = round((int)$dose2Tot * 0.22);
+                    $data->{'ageDebut'.'90'} = round((int)$debut * 0.22);
+                    $data->{'ageComplet'.'90'} = round((int)$complet * 0.22);
+                    $data->{'ageRappel'.'90'} = round((int)$rappel * 0.22);
+                    $data->{'ageDebutTot'.'90'} = round((int)$debutTot * 0.22);
+                    $data->{'ageCompletTot'.'90'} = round((int)$completTot * 0.22);
+                    $data->{'ageRappelTot'.'90'} = round((int)$rappelTot * 0.22);
                 } else {
-                    $data->{'ageDose1'.$age} = (int)$dose1;
-                    $data->{'ageDose2'.$age} = (int)$dose2;
-                    $data->{'ageDose1Tot'.$age} = (int)$dose1Tot;
-                    $data->{'ageDose2Tot'.$age} = (int)$dose2Tot;
+                    $data->{'ageDebut'.$age} = (int)$debut;
+                    $data->{'ageComplet'.$age} = (int)$complet;
+                    $data->{'ageRappel'.$age} = (int)$rappel;
+                    $data->{'ageDebutTot'.$age} = (int)$debutTot;
+                    $data->{'ageCompletTot'.$age} = (int)$completTot;
+                    $data->{'ageRappelTot'.$age} = (int)$rappelTot;
                 }
             }
         }
@@ -149,8 +172,9 @@ class VacsiAge
 
             foreach ($ages as $age) {
                 if ($countryData->{'agePop'.$age} !== null) {
-                    $countryData->{'ageDose1Couv'.$age} = round($countryData->{'ageDose1Tot'.$age} / $countryData->{'agePop'.$age} * 100, 1);
-                    $countryData->{'ageDose2Couv'.$age} = round($countryData->{'ageDose2Tot'.$age} / $countryData->{'agePop'.$age} * 100, 1);
+                    $countryData->{'ageDebutCouv'.$age} = round($countryData->{'ageDebutTot'.$age} / $countryData->{'agePop'.$age} * 100, 1);
+                    $countryData->{'ageCompletCouv'.$age} = round($countryData->{'ageCompletTot'.$age} / $countryData->{'agePop'.$age} * 100, 1);
+                    $countryData->{'ageRappelCouv'.$age} = round($countryData->{'ageRappelTot'.$age} / $countryData->{'agePop'.$age} * 100, 1);
                 }
             }
 
@@ -159,8 +183,9 @@ class VacsiAge
 
                 foreach ($ages as $age) {
                     if ($regionData->{'agePop'.$age} !== null) {
-                        $regionData->{'ageDose1Couv'.$age} = round($regionData->{'ageDose1Tot'.$age} / $regionData->{'agePop'.$age} * 100, 1);
-                        $regionData->{'ageDose2Couv'.$age} = round($regionData->{'ageDose2Tot'.$age} / $regionData->{'agePop'.$age} * 100, 1);
+                        $regionData->{'ageDebutCouv'.$age} = round($regionData->{'ageDebutTot'.$age} / $regionData->{'agePop'.$age} * 100, 1);
+                        $regionData->{'ageCompletCouv'.$age} = round($regionData->{'ageCompletTot'.$age} / $regionData->{'agePop'.$age} * 100, 1);
+                        $regionData->{'ageRappelCouv'.$age} = round($regionData->{'ageRappelTot'.$age} / $regionData->{'agePop'.$age} * 100, 1);
                     }
                 }
 
@@ -169,8 +194,9 @@ class VacsiAge
 
                     foreach ($ages as $age) {
                         if ($departmentData->{'agePop'.$age} !== null) {
-                            $departmentData->{'ageDose1Couv'.$age} = round($departmentData->{'ageDose1Tot'.$age} / $departmentData->{'agePop'.$age} * 100, 1);
-                            $departmentData->{'ageDose2Couv'.$age} = round($departmentData->{'ageDose2Tot'.$age} / $departmentData->{'agePop'.$age} * 100, 1);
+                            $departmentData->{'ageDebutCouv'.$age} = round($departmentData->{'ageDebutTot'.$age} / $departmentData->{'agePop'.$age} * 100, 1);
+                            $departmentData->{'ageCompletCouv'.$age} = round($departmentData->{'ageCompletTot'.$age} / $departmentData->{'agePop'.$age} * 100, 1);
+                            $departmentData->{'ageRappelCouv'.$age} = round($departmentData->{'ageRappelTot'.$age} / $departmentData->{'agePop'.$age} * 100, 1);
                         }
                     }
                 }

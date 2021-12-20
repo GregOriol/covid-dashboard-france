@@ -298,7 +298,7 @@ $indicators = array(
     'pop',
     't', 'p', 'tx', 'tx7', 'txPos', 'txPos7',
     'consolTx', 'consolTxPos', 'r', 'occup',
-    'dose1', 'dose2', 'dose1Tot', 'dose2Tot', 'dose1Couv', 'dose2Couv',
+    /*'debut',*/ 'complet', 'rappel', /*'debutTot',*/ 'completTot', 'rappelTot', /*'debutCouv',*/ 'completCouv', 'rappelCouv',
 );
 Helpers::agesIterator(function ($age) use (&$indicators) {
     $indicators[] = 'ageHosp'.$age;
@@ -307,12 +307,15 @@ Helpers::agesIterator(function ($age) use (&$indicators) {
     $indicators[] = 'ageDc'.$age;
     $indicators[] = 'ageP'.$age;
     $indicators[] = 'agePop'.$age;
-    $indicators[] = 'ageDose1'.$age;
-    $indicators[] = 'ageDose2'.$age;
-    $indicators[] = 'ageDose1Tot'.$age;
-    $indicators[] = 'ageDose2Tot'.$age;
-    $indicators[] = 'ageDose1Couv'.$age;
-    $indicators[] = 'ageDose2Couv'.$age;
+    /*$indicators[] = 'ageDebut'.$age;*/
+    $indicators[] = 'ageComplet'.$age;
+    $indicators[] = 'ageRappel'.$age;
+    /*$indicators[] = 'ageDebutTot'.$age;*/
+    $indicators[] = 'ageCompletTot'.$age;
+    $indicators[] = 'ageRappelTot'.$age;
+    /*$indicators[] = 'ageDebutCouv'.$age;*/
+    $indicators[] = 'ageCompletCouv'.$age;
+    $indicators[] = 'ageRappelCouv'.$age;
 });
 
 $output = array(

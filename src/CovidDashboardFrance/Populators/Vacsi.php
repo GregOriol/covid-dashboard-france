@@ -49,24 +49,20 @@ class Vacsi
                 if ($i === 1) { continue; } // skipping header
 
                 $row = str_getcsv($row, ';');
-                if (count($row) !== 8) { continue; }
+                if (count($row) !== 11) { continue; }
                 if ($row[0] === '') { continue; } // cleaning invalid data
 
                 $loc = $row[0];
                 $jour = $row[1];
-                $dose1 = $row[2];
-                $dose2 = $row[3];
-                if ($type === 'country') {
-                    $dose1Tot  = $row[4];
-                    $dose1Couv = $row[6];
-                    $dose2Tot  = $row[5];
-                    $dose2Couv = $row[7];
-                } elseif ($type === 'region' || $type === 'department') {
-                    $dose1Tot  = $row[4];
-                    $dose1Couv = $row[6];
-                    $dose2Tot  = $row[5];
-                    $dose2Couv = $row[7];
-                }
+                $debut = $row[2];
+                $complet = $row[3];
+                $rappel = $row[4];
+                $debutTot  = $row[5];
+                $completTot  = $row[6];
+                $rappelTot  = $row[7];
+                $debutCouv = $row[8];
+                $completCouv = $row[9];
+                $rappelCouv = $row[10];
 
                 $country = 'FRA';
                 $region = null;
@@ -87,12 +83,15 @@ class Vacsi
                 $data = $this->covid->getDataForDate($date, $country, $region ? $region->number : null, $department ? $department->number : null);
                 if (!$data) { continue; }
 
-                $data->dose1 = (int)$dose1;
-                $data->dose2 = (int)$dose2;
-                $data->dose1Tot = (int)$dose1Tot;
-                $data->dose1Couv = (float)$dose1Couv;
-                $data->dose2Tot = (int)$dose2Tot;
-                $data->dose2Couv = (float)$dose2Couv;
+                $data->debut = (int)$debut;
+                $data->complet = (int)$complet;
+                $data->rappel = (int)$rappel;
+                $data->debutTot = (int)$debutTot;
+                $data->completTot = (int)$completTot;
+                $data->rappelTot = (int)$rappelTot;
+                $data->debutCouv = (float)$debutCouv;
+                $data->completCouv = (int)$completCouv;
+                $data->rappelCouv = (float)$rappelCouv;
             }
         }
     }

@@ -179,143 +179,212 @@ class Data
     public $occup = null;
 
     /** @var int|null */
-    public $dose1 = null;
+    public $debut = null;
     /** @var int|null */
-    public $dose2 = null;
+    public $complet = null;
     /** @var int|null */
-    public $dose1Tot = null;
+    public $rappel = null;
+    /** @var int|null */
+    public $debutTot = null;
+    /** @var int|null */
+    public $completTot = null;
+    /** @var int|null */
+    public $rappelTot = null;
     /** @var float|null */
-    public $dose1Couv = null;
+    public $debutCouv = null;
     /** @var int|null */
-    public $dose2Tot = null;
+    public $completCouv = null;
     /** @var float|null */
-    public $dose2Couv = null;
+    public $rappelCouv = null;
 
     /** @var int|null */
-    public $ageDose109 = null;
+    public $ageDebut09 = null;
     /** @var int|null */
-    public $ageDose119 = null;
+    public $ageDebut19 = null;
     /** @var int|null */
-    public $ageDose129 = null;
+    public $ageDebut29 = null;
     /** @var int|null */
-    public $ageDose139 = null;
+    public $ageDebut39 = null;
     /** @var int|null */
-    public $ageDose149 = null;
+    public $ageDebut49 = null;
     /** @var int|null */
-    public $ageDose159 = null;
+    public $ageDebut59 = null;
     /** @var int|null */
-    public $ageDose169 = null;
+    public $ageDebut69 = null;
     /** @var int|null */
-    public $ageDose179 = null;
+    public $ageDebut79 = null;
     /** @var int|null */
-    public $ageDose189 = null;
+    public $ageDebut89 = null;
     /** @var int|null */
-    public $ageDose190 = null;
+    public $ageDebut90 = null;
 
     /** @var int|null */
-    public $ageDose209 = null;
+    public $ageComplet09 = null;
     /** @var int|null */
-    public $ageDose219 = null;
+    public $ageComplet19 = null;
     /** @var int|null */
-    public $ageDose229 = null;
+    public $ageComplet29 = null;
     /** @var int|null */
-    public $ageDose239 = null;
+    public $ageComplet39 = null;
     /** @var int|null */
-    public $ageDose249 = null;
+    public $ageComplet49 = null;
     /** @var int|null */
-    public $ageDose259 = null;
+    public $ageComplet59 = null;
     /** @var int|null */
-    public $ageDose269 = null;
+    public $ageComplet69 = null;
     /** @var int|null */
-    public $ageDose279 = null;
+    public $ageComplet79 = null;
     /** @var int|null */
-    public $ageDose289 = null;
+    public $ageComplet89 = null;
     /** @var int|null */
-    public $ageDose290 = null;
+    public $ageComplet90 = null;
 
     /** @var int|null */
-    public $ageDose1Tot09 = null;
+    public $ageRappel09 = null;
     /** @var int|null */
-    public $ageDose1Tot19 = null;
+    public $ageRappel19 = null;
     /** @var int|null */
-    public $ageDose1Tot29 = null;
+    public $ageRappel29 = null;
     /** @var int|null */
-    public $ageDose1Tot39 = null;
+    public $ageRappel39 = null;
     /** @var int|null */
-    public $ageDose1Tot49 = null;
+    public $ageRappel49 = null;
     /** @var int|null */
-    public $ageDose1Tot59 = null;
+    public $ageRappel59 = null;
     /** @var int|null */
-    public $ageDose1Tot69 = null;
+    public $ageRappel69 = null;
     /** @var int|null */
-    public $ageDose1Tot79 = null;
+    public $ageRappel79 = null;
     /** @var int|null */
-    public $ageDose1Tot89 = null;
+    public $ageRappel89 = null;
     /** @var int|null */
-    public $ageDose1Tot90 = null;
+    public $ageRappel90 = null;
 
     /** @var int|null */
-    public $ageDose2Tot09 = null;
+    public $ageDebutTot09 = null;
     /** @var int|null */
-    public $ageDose2Tot19 = null;
+    public $ageDebutTot19 = null;
     /** @var int|null */
-    public $ageDose2Tot29 = null;
+    public $ageDebutTot29 = null;
     /** @var int|null */
-    public $ageDose2Tot39 = null;
+    public $ageDebutTot39 = null;
     /** @var int|null */
-    public $ageDose2Tot49 = null;
+    public $ageDebutTot49 = null;
     /** @var int|null */
-    public $ageDose2Tot59 = null;
+    public $ageDebutTot59 = null;
     /** @var int|null */
-    public $ageDose2Tot69 = null;
+    public $ageDebutTot69 = null;
     /** @var int|null */
-    public $ageDose2Tot79 = null;
+    public $ageDebutTot79 = null;
     /** @var int|null */
-    public $ageDose2Tot89 = null;
+    public $ageDebutTot89 = null;
     /** @var int|null */
-    public $ageDose2Tot90 = null;
+    public $ageDebutTot90 = null;
+
+    /** @var int|null */
+    public $ageCompletTot09 = null;
+    /** @var int|null */
+    public $ageCompletTot19 = null;
+    /** @var int|null */
+    public $ageCompletTot29 = null;
+    /** @var int|null */
+    public $ageCompletTot39 = null;
+    /** @var int|null */
+    public $ageCompletTot49 = null;
+    /** @var int|null */
+    public $ageCompletTot59 = null;
+    /** @var int|null */
+    public $ageCompletTot69 = null;
+    /** @var int|null */
+    public $ageCompletTot79 = null;
+    /** @var int|null */
+    public $ageCompletTot89 = null;
+    /** @var int|null */
+    public $ageCompletTot90 = null;
+
+    /** @var int|null */
+    public $ageRappelTot09 = null;
+    /** @var int|null */
+    public $ageRappelTot19 = null;
+    /** @var int|null */
+    public $ageRappelTot29 = null;
+    /** @var int|null */
+    public $ageRappelTot39 = null;
+    /** @var int|null */
+    public $ageRappelTot49 = null;
+    /** @var int|null */
+    public $ageRappelTot59 = null;
+    /** @var int|null */
+    public $ageRappelTot69 = null;
+    /** @var int|null */
+    public $ageRappelTot79 = null;
+    /** @var int|null */
+    public $ageRappelTot89 = null;
+    /** @var int|null */
+    public $ageRappelTot90 = null;
 
     /** @var float|null */
-    public $ageDose1Couv09 = null;
+    public $ageDebutCouv09 = null;
     /** @var float|null */
-    public $ageDose1Couv19 = null;
+    public $ageDebutCouv19 = null;
     /** @var float|null */
-    public $ageDose1Couv29 = null;
+    public $ageDebutCouv29 = null;
     /** @var float|null */
-    public $ageDose1Couv39 = null;
+    public $ageDebutCouv39 = null;
     /** @var float|null */
-    public $ageDose1Couv49 = null;
+    public $ageDebutCouv49 = null;
     /** @var float|null */
-    public $ageDose1Couv59 = null;
+    public $ageDebutCouv59 = null;
     /** @var float|null */
-    public $ageDose1Couv69 = null;
+    public $ageDebutCouv69 = null;
     /** @var float|null */
-    public $ageDose1Couv79 = null;
+    public $ageDebutCouv79 = null;
     /** @var float|null */
-    public $ageDose1Couv89 = null;
+    public $ageDebutCouv89 = null;
     /** @var float|null */
-    public $ageDose1Couv90 = null;
+    public $ageDebutCouv90 = null;
 
     /** @var float|null */
-    public $ageDose2Couv09 = null;
+    public $ageCompletCouv09 = null;
     /** @var float|null */
-    public $ageDose2Couv19 = null;
+    public $ageCompletCouv19 = null;
     /** @var float|null */
-    public $ageDose2Couv29 = null;
+    public $ageCompletCouv29 = null;
     /** @var float|null */
-    public $ageDose2Couv39 = null;
+    public $ageCompletCouv39 = null;
     /** @var float|null */
-    public $ageDose2Couv49 = null;
+    public $ageCompletCouv49 = null;
     /** @var float|null */
-    public $ageDose2Couv59 = null;
+    public $ageCompletCouv59 = null;
     /** @var float|null */
-    public $ageDose2Couv69 = null;
+    public $ageCompletCouv69 = null;
     /** @var float|null */
-    public $ageDose2Couv79 = null;
+    public $ageCompletCouv79 = null;
     /** @var float|null */
-    public $ageDose2Couv89 = null;
+    public $ageCompletCouv89 = null;
     /** @var float|null */
-    public $ageDose2Couv90 = null;
+    public $ageCompletCouv90 = null;
+
+    /** @var float|null */
+    public $ageRappelCouv09 = null;
+    /** @var float|null */
+    public $ageRappelCouv19 = null;
+    /** @var float|null */
+    public $ageRappelCouv29 = null;
+    /** @var float|null */
+    public $ageRappelCouv39 = null;
+    /** @var float|null */
+    public $ageRappelCouv49 = null;
+    /** @var float|null */
+    public $ageRappelCouv59 = null;
+    /** @var float|null */
+    public $ageRappelCouv69 = null;
+    /** @var float|null */
+    public $ageRappelCouv79 = null;
+    /** @var float|null */
+    public $ageRappelCouv89 = null;
+    /** @var float|null */
+    public $ageRappelCouv90 = null;
 
     /**
      * HospTotal constructor.
